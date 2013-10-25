@@ -6,7 +6,7 @@
       <link rel="stylesheet" href="../css/theme/default.css" id="theme">
 
       <!-- For syntax highlighting -->
-      <link rel="stylesheet" href="../lib/css/zenburn.css">
+    <link rel="stylesheet" href="../lib/css/zenburn.css">
 
       <!-- If the query includes 'print-pdf', use the PDF print sheet -->
       <script>
@@ -19,51 +19,65 @@
         <section>
           <h1>The CW Tech Academy</h1>
           <h3>What? Why? How?</h3>
-          <p>
+          <p class="author">
             <small>Created by <a href="http://twitter.com/tory_jim">James Robinson</a> and <a href="">Miroslav Paskov</a></small>
           </p>
         </section>
         <section>
           <section>
-            <h1>What?</h1>
+            <h2>What?</h2>
+            <p class="fragment">A series of courses and materials to encourage young people to take up computer programming.</p>
+            <p class="fragment">The key features of our programmes will be:</p>
             <ul>
-              <li>Interesting Projects</li>
-              <li>Industry Tools</li>
-              <li>Inspirational Passion</li>
+              <li class="fragment">Inspiring Passion</li>
+              <li class="fragment">Interesting Projects</li>
+              <li class="fragment">Industry Tools</li>
             </ul>
           </section>
           <section>
-            <h1>Interesting Projects</h1>
+            <h2>Inspire Passion</h2>
+            <p class="fragment">We are creating a rod for our own backs here.</p>
+            <p class="fragment">Important because computer programming is most successfully learned through practice.</p>
+            <p class="fragment">Practice requires self motivation which is much easier to do if one is passionate.</p>
           </section>
           <section>
-            <h1>Industry Tools</h1>
+            <h2>Interesting Projects</h2>
+            <p class="fragment">Holding the interest of participants will be most easily achieved if our projects are interesting.</p>
+            <p class="fragment">We intend to start with a website, as it is the quickest way to get something on screen.</p>
+            <p class="fragment">For those who don't have their own idea, we intend to build a simple twitter clone.</p>
           </section>
           <section>
-            <h1>Inspirational Passion</h1>
+            <h2>Industry Tools</h2>
+            <p class="fragment">We are passionate about sharing and developing skills which are of real practical use.</p>
+            <p class="fragment">Consequently we intend to use real industry tools, all of which will be open-source.</p>
+            <p class="fragment">Successful participants will be able to talk about their project with a computer programmer as a peer.</p>
           </section>
         </section>
         <section>
           <section>
-            <h1>Why?</h1>
+            <h2>Why?</h2>
+            <p class="fragment"></p>
+            <p class="fragment">To .</p>
             <ul>
-              <li>Qualification Gap</li>
-              <li>Gender Imbalance</li>
-              <li>Community Outreach</li>
+              <li class="fragment">Qualification Gap</li>
+              <li class="fragment">Gender Imbalance</li>
+              <li class="fragment">Community Outreach</li>
             </ul>
           </section>
           <section>
-            <h1>Qualification Gap</h1>
+            <h2>Qualification Gap</h2>
+            <p class="fragment">We are passionate about sharing and developing skills which are of real practical use.</p>
           </section>
           <section>
-            <h1>Gender Imbalance</h1>
+            <h2>Gender Imbalance</h2>
           </section>
           <section>
-            <h1>Community Outreach</h1>
+            <h2>Community Outreach</h2>
           </section>
         </section>
         <section>
           <section>
-            <h1>How?</h1>
+            <h2>How?</h2>
             <ul>
               <li>Item 1</li>
               <li>Item 2</li>
@@ -71,13 +85,13 @@
             </ul>
           </section>
           <section>
-            <h1>Item 1</h1>
+            <h2>Item 1</h2>
           </section>
           <section>
-            <h1>Item 2</h1>
+            <h2>Item 2</h2>
           </section>
           <section>
-            <h1>Item 3</h1>
+            <h2>Item 3</h2>
           </section>
         </section>
       </div>
@@ -94,9 +108,7 @@
         controls: true,
         progress: true,
         history: true,
-
-        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/none
+        transition: 'linear', // default/cube/page/concave/zoom/linear/none
 
         // Optional libraries used to extend on reveal.js
         dependencies: [
