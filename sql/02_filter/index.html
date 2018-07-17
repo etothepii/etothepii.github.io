@@ -48,7 +48,132 @@
                 <pre class="sql"><code>SELECT TOP 10 * FROM atlantic</code></pre>
             </section>
         </section>
-
+        <section>
+            <h1>WHERE</h1>
+            <ul>
+                <li class="fragment">Used to filter a large number of results.</li>
+                <li class="fragment">When used with text or date must be used with single quotes '</li>
+                <li class="fragment">When used with numbers no quotes should be used</li>
+            </ul>
+        </section>
+        <section id="equal">
+            <section>
+                <h1>Equal</h1>
+                <h2>=</h2>
+                <p>Used to compare values that are the same.</p>
+            </section>
+            <section>
+                <h1>Equal</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name = 'Harvey'</code></pre>
+            </section>
+        </section>
+        <section id="not-equal">
+            <section>
+                <h1>Not Equal</h1>
+                <h2>&lt;&gt; or !=</h2>
+                <p>Used to Exclude values which are not the same.</p>
+            </section>
+            <section>
+                <h1>Not Equal</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name != 'Harvey'</code></pre>
+            </section>
+        </section>
+        <section id="greater-than">
+            <section>
+                <h1>Greater Than</h1>
+                <h2>&gt;</h2>
+                <p>Used to select rows where the value in the named column is greater than the specified value</p>
+            </section>
+            <section>
+                <h1>Greater Than</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE latitude > 28</code></pre>
+            </section>
+        </section>
+        <section id="less-than">
+            <section>
+                <h1>Less Than</h1>
+                <h2>&lt;</h2>
+                <p>Used to select rows where the value in the named column is less than the specified value</p>
+            </section>
+            <section>
+                <h1>Less Than</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE latitude < 28</code></pre>
+            </section>
+        </section>
+        <section id="greater-than-or-equal">
+            <section>
+                <h1>Greater Than or Equal</h1>
+                <h2>&gt;=</h2>
+                <p>Used to select rows where the value in the named column is greater than or equal to the specified value</p>
+            </section>
+            <section>
+                <h1>Greater Than or Equal</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE latitude >= 28</code></pre>
+            </section>
+        </section>
+        <section id="less-than-or-equal">
+            <section>
+                <h1>Less Than or Equal</h1>
+                <h2>&lt;=</h2>
+                <p>Used to select rows where the value in the named column is less than or equal to the specified value.</p>
+            </section>
+            <section>
+                <h1>Less Than or Equal</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE latitude <= 28</code></pre>
+            </section>
+        </section>
+        <section id="between">
+            <section>
+                <h1>Between</h1>
+                <h2>BETWEEN ... AND ... </h2>
+                <p>Used to select rows where the value in the named column is BETWEEN the specified values.</p>
+            </section>
+            <section>
+                <h1>Between</h1>
+                <h2>BETWEEN ... AND ...</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE latitude BETWEEN 28 AND 30</code></pre>
+            </section>
+        </section>
+        <section id="in">
+            <section>
+                <h1>In</h1>
+                <h2>IN (...)</h2>
+                <p>Used to select rows where the value in the named column is one of those listed in brackets.</p>
+            </section>
+            <section>
+                <h1>In</h1>
+                <h2>IN (...)</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE latitude IN (28, 29, 30)</code></pre>
+            </section>
+        </section>
+        <section id="LIKE">
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &quot;PATTERN&quot;</h2>
+                <p>Used to select rows where the value in the named column matches the pattern provided.</p>
+            </section>
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &quot;%vey%&quot;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;Har%&quot;</code></pre>
+            </section>
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &quot;%vey&quot;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;%vey&quot;</code></pre>
+            </section>
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &quot;%rve%&quot;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;%rve%&quot;</code></pre>
+            </section>
+        </section>
         <section>
             <h1>Questions?</h1>
         </section>
