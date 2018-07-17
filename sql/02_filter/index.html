@@ -156,22 +156,37 @@
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &quot;PATTERN&quot;</h2>
-                <p>Used to select rows where the value in the named column matches the pattern provided.</p>
+                <p>Used to select rows where the value in the named column matches the pattern provided. Normally capitals and lower case do not matter.</p>
             </section>
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &quot;%vey%&quot;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;Har%&quot;</code></pre>
+                <p>Matches when begins with &quot;HAR&quot;.</p>
             </section>
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &quot;%vey&quot;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;%vey&quot;</code></pre>
+                <p>Matches when ends with &quot;VEY&quot;.</p>
             </section>
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &quot;%rve%&quot;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;%rve%&quot;</code></pre>
+                <p>Matches when contains &quot;RVE&quot; anywhere.</p>
+            </section>
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &quot;_ar%y&quot;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;_ar%y&quot;</code></pre>
+                <p>Matches when &quot;ar&quot; are the second and third letters and ends with a &quot;y&quot;.</p>
+            </section>
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &quot;H_____&quot;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;H_____&quot;</code></pre>
+                <p>Matches when the column begins with an &quot;H&quot; and has precisely 6 letters.</p>
             </section>
         </section>
         <section>
