@@ -1,0 +1,79 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CTO Lecture Series - SQL 101 - 1 Intro to SQL</title>
+
+    <link rel="stylesheet" href="../../css/reveal.css">
+    <link rel="stylesheet" href="../../css/theme/teal.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>CTO Lecture Series</h1>
+            <h2>SQL 101</h2>
+            <p class="author">
+                <small>Created by <a href="http://twitter.com/_jim87">James Robinson</a> for <a
+                        href="http://www.openhamilton.com">Hamilton Re</a></small>
+            </p>
+        </section>
+        <section id="recap">
+            <section>
+                <h1>Recap</h1>
+                <ul>
+                    <li class="fragment">Last time we learned how to log in to a SQL server.</li>
+                    <li class="fragment">How to select a number of columns from a table.</li>
+                    <li class="fragment">How to get all the columns from a table with *.</li>
+                </ul>
+            </section>
+            <section data-background="img/slide_01.png"></section>
+            <section>
+                <pre class="sql"><code>SELECT Name, Date FROM atlantic</code></pre>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT * FROM atlantic</code></pre>
+            </section>
+        </section>
+
+        <section>
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../../lib/js/head.min.js"></script>
+<script src="../../js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
