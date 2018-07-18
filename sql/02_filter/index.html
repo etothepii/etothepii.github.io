@@ -64,28 +64,28 @@
             <section>
                 <h1>Equal</h1>
                 <h2>=</h2>
-                <p>Used to compare values that are the same.</p>
+                <p>Used to compare values that are the same, numeric types only.</p>
             </section>
             <section>
                 <h1>Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE name = 'Harvey'</code></pre>
+WHERE time = 600</code></pre>
             </section>
         </section>
         <section id="not-equal">
             <section>
                 <h1>Not Equal</h1>
                 <h2>&lt;&gt; or !=</h2>
-                <p>Used to Exclude values which are not the same.</p>
+                <p>Used to Exclude values which are not the same, numeric types only.</p>
             </section>
             <section>
                 <h1>Not Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE name &lt;&gt; 'Harvey'</code></pre>
+WHERE time &lt;&gt; 600</code></pre>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE name != 'Harvey'</code></pre>
+WHERE time != 600</code></pre>
             </section>
         </section>
         <section id="greater-than">
@@ -197,6 +197,13 @@ WHERE Event IS NOT NULL</code></pre>
                 <h1>Like</h1>
                 <h2>LIKE &apos;PATTERN&apos;</h2>
                 <p>Used to select rows where the value in the named column matches the pattern provided. Normally capitals and lower case do not matter.</p>
+            </section>
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &apos;Harvey&apos;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic
+WHERE name LIKE &apos;Harvey&apos;</code></pre>
+                <p>Matches when precisely &apos;HARVEY&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
