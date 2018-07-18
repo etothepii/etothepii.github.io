@@ -36,8 +36,9 @@
                 <h1>Recap</h1>
                 <ul>
                     <li class="fragment">Last time we learned how to log in to a SQL server.</li>
-                    <li class="fragment">How to select a data from a table.</li>
+                    <li class="fragment">How to select data from a table.</li>
                     <li class="fragment">How to select a limited number of results with TOP.</li>
+                    <li class="fragment">How to refer to a column whose name contains a space.</li>
                 </ul>
             </section>
             <section data-background="img/slide_01.png"></section>
@@ -47,13 +48,16 @@
             <section>
                 <pre class="sql"><code>SELECT TOP 10 * FROM atlantic</code></pre>
             </section>
+            <section>
+                <pre class="sql"><code>SELECT [Maximum Wind] FROM atlantic</code></pre>
+            </section>
         </section>
         <section>
             <h1>WHERE</h1>
             <ul>
                 <li class="fragment">Used to filter a large number of results.</li>
-                <li class="fragment">When used with text or date must be used with single quotes '</li>
-                <li class="fragment">When used with numbers no quotes should be used</li>
+                <li class="fragment">When used with text or date must be used with single aposes '</li>
+                <li class="fragment">When used with numbers no aposes should be used</li>
             </ul>
         </section>
         <section id="equal">
@@ -152,44 +156,201 @@
                 <pre class="sql"><code>SELECT * FROM atlantic WHERE latitude IN (28, 29, 30)</code></pre>
             </section>
         </section>
+        <section id="is">
+            <section>
+                <h1>Is</h1>
+                <h2>IS NULL</h2>
+                <p>Used to select rows where the value in the named column is the special NULL value.</p>
+            </section>
+            <section>
+                <h1>Is</h1>
+                <h2>IS NULL</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE Event IS NULL</code></pre>
+            </section>
+        </section>
+        <section id="not">
+            <section>
+                <h1>Not</h1>
+                <h2>NOT</h2>
+                <p>Used to invert any other command.</p>
+            </section>
+            <section>
+                <h1>Not</h1>
+                <h2>NOT</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE Event IS NOT NULL</code></pre>
+            </section>
+        </section>
         <section id="LIKE">
             <section>
                 <h1>Like</h1>
-                <h2>LIKE &quot;PATTERN&quot;</h2>
+                <h2>LIKE &apos;PATTERN&apos;</h2>
                 <p>Used to select rows where the value in the named column matches the pattern provided. Normally capitals and lower case do not matter.</p>
             </section>
             <section>
                 <h1>Like</h1>
-                <h2>LIKE &quot;%vey%&quot;</h2>
-                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;Har%&quot;</code></pre>
-                <p>Matches when begins with &quot;HAR&quot;.</p>
+                <h2>LIKE &apos;%vey%&apos;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &apos;Har%&apos;</code></pre>
+                <p>Matches when begins with &apos;HAR&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
-                <h2>LIKE &quot;%vey&quot;</h2>
-                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;%vey&quot;</code></pre>
-                <p>Matches when ends with &quot;VEY&quot;.</p>
+                <h2>LIKE &apos;%vey&apos;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &apos;%vey&apos;</code></pre>
+                <p>Matches when ends with &apos;VEY&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
-                <h2>LIKE &quot;%rve%&quot;</h2>
-                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;%rve%&quot;</code></pre>
-                <p>Matches when contains &quot;RVE&quot; anywhere.</p>
+                <h2>LIKE &apos;%rve%&apos;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &apos;%rve%&apos;</code></pre>
+                <p>Matches when contains &apos;RVE&apos; anywhere.</p>
             </section>
             <section>
                 <h1>Like</h1>
-                <h2>LIKE &quot;_ar%y&quot;</h2>
-                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;_ar%y&quot;</code></pre>
-                <p>Matches when &quot;ar&quot; are the second and third letters and ends with a &quot;y&quot;.</p>
+                <h2>LIKE &apos;_ar%y&apos;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &apos;_ar%y&apos;</code></pre>
+                <p>Matches when &apos;ar&apos; are the second and third letters and ends with a &apos;y&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
-                <h2>LIKE &quot;H_____&quot;</h2>
-                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &quot;H_____&quot;</code></pre>
-                <p>Matches when the column begins with an &quot;H&quot; and has precisely 6 letters.</p>
+                <h2>LIKE &apos;H_____&apos;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE name LIKE &apos;H_____&apos;</code></pre>
+                <p>Matches when the column begins with an &apos;H&apos; and has precisely 6 letters.</p>
+            </section>
+        </section>
+        <section id="and">
+            <section>
+                <h1>And</h1>
+                <h2>AND</h2>
+                <p>Used to compound two commands together where both must be satisfied.</p>
+            </section>
+            <section>
+                <h1>And</h1>
+                <h2>AND</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE Event IS NOT NULL AND Status = 'HU'</code></pre>
+            </section>
+        </section>
+        <section id="or">
+            <section>
+                <h1>Or</h1>
+                <h2>OR</h2>
+                <p>Used to compound two commands together where either may be satisfied.</p>
+            </section>
+            <section>
+                <h1>Or</h1>
+                <h2>OR</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE Event IS NOT NULL OR Status = 'HU'</code></pre>
             </section>
         </section>
         <section>
+            <section>
+                <h1>Exercise 1</h1>
+            </section>
+            <section>
+                <p>Show the names, dates and times of all the pacific rows that have a maximum wind speed of 80.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name, Date, Time FROM pacific WHERE [Maximum Wind] = 80</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 2</h1>
+            </section>
+            <section>
+                <p>Show all the columns of all the rows that represent atlantic hurricanes.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE Status = &apos;HU&apos;</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 3</h1>
+            </section>
+            <section>
+                <p>Show the latitude and longitude of all the atlantic rows that did not occur at midnight.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Longitude, Latitude FROM atlantic WHERE TIME != 0</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 4</h1>
+            </section>
+            <section>
+                <p>Show the latitude and longitude of all the atlantic rows that were not a hurricane.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Latitude, Longitude FROM atlantic WHERE Status != &apos;HU&apos;</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 5</h1>
+            </section>
+            <section>
+                <p>Show the first 10 names, dates and times of all the rows that have a maximum wind speed of 80 and a time of midday</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT TOP 10 Name, Date, Time FROM atlantic WHERE [Maximum Wind] = 80 AND Time = 1200</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 6</h1>
+            </section>
+            <section>
+                <p>Show the names, dates and times of all the rows that have a maximum wind speed between 75 and 125</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic WHERE [Maximum Wind] BETWEEN 75 AND 125</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 7</h1>
+            </section>
+            <section>
+                <p>Show the date of all the rows that have a latitude greater than 30 or a longitude less than -100</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Date FROM atlantic WHERE latitude > 30 OR longitude < -100</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 8</h1>
+            </section>
+            <section>
+                <p>Show the names of all Hurricanes whose names have exactly 3 letters in</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name FROM atlantic WHERE Name LIKE &apos;___&apos;</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 9</h1>
+            </section>
+            <section>
+                <p>Show all the first 100 rows with all columns where the name contains an &apos;e&apos; and an &apos;i&apos;</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 10</h1>
+            </section>
+            <section>
+                <p>Show all columns of all the rows that have a maximum wind speed of 80 or a latitude between 28 and 29 and a longitude between -98 and -99</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT * FROM atlantic WHERE [Maximum Wind] = 80 OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -98 AND -99)</code></pre>
+            </section>
+        </section>
             <h1>Questions?</h1>
         </section>
     </div>
