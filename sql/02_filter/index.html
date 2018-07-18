@@ -334,7 +334,7 @@ WHERE [Maximum Wind] = 80 AND Time = 1200</code></pre>
                 <h1>Exercise 6</h1>
             </section>
             <section>
-                <p>Show the names, dates and times of all the rows that have a maximum wind speed between 75 and 125</p>
+                <p>Show the names, dates and times of all the atlantic rows that have a maximum wind speed between 75 and 125</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
@@ -346,7 +346,7 @@ WHERE [Maximum Wind] BETWEEN 75 AND 125</code></pre>
                 <h1>Exercise 7</h1>
             </section>
             <section>
-                <p>Show the date of all the rows that have a latitude greater than 30 or a longitude less than -100</p>
+                <p>Show the date of all the atlantic rows that have a latitude greater than 30 or a longitude less than -100</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Date FROM atlantic
@@ -370,7 +370,7 @@ WHERE Name LIKE &apos;___&apos; AND status LIKE &apos;HU&apos;</code></pre>
                 <h1>Exercise 9</h1>
             </section>
             <section>
-                <p>Show all the first 100 rows with all columns where the name contains an &apos;e&apos; and an &apos;i&apos;</p>
+                <p>Show all the first 100 atlantic rows with all columns where the name contains an &apos;e&apos; and an &apos;i&apos;</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
@@ -382,7 +382,7 @@ WHERE Name LIKE &apos;%e%i%&apos; OR Name LIKE &apos;%i%e%&apos;</code></pre>
                 <h1>Exercise 10</h1>
             </section>
             <section>
-                <p>Show all columns of all the rows that have a maximum wind speed of 80 or a latitude between 28 and 29 and a longitude between -98 and -99</p>
+                <p>Show all columns of all the atlantic rows that have a maximum wind speed of 80 or a latitude between 28 and 29 and a longitude between -98 and -99</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
