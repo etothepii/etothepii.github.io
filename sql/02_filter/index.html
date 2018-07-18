@@ -322,7 +322,7 @@ WHERE Status NOT LIKE &apos;HU&apos;</code></pre>
                 <h1>Exercise 5</h1>
             </section>
             <section>
-                <p>Show the first 10 names, dates and times of all the rows that have a maximum wind speed of 80 and a time of midday</p>
+                <p>Show the first 10 names, dates and times of all the atlantic rows that have a maximum wind speed of 80 and a time of midday</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT TOP 10 Name, Date, Time FROM atlantic
@@ -362,7 +362,7 @@ WHERE latitude > 30 OR longitude < -100</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name FROM atlantic
-WHERE Name LIKE &apos;___&apos;</code></pre>
+WHERE Name LIKE &apos;___&apos; AND status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
