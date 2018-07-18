@@ -253,7 +253,7 @@ WHERE name LIKE &apos;H_____&apos;</code></pre>
                 <h1>And</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE Event IS NOT NULL AND Status = &apos;HU&apos;</code></pre>
+WHERE Event IS NOT NULL AND Status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section id="or">
@@ -266,7 +266,7 @@ WHERE Event IS NOT NULL AND Status = &apos;HU&apos;</code></pre>
                 <h1>Or</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE Event IS NOT NULL OR Status = &apos;HU&apos;</code></pre>
+WHERE Event IS NOT NULL OR Status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -290,7 +290,7 @@ WHERE [Maximum Wind] = 80</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE Status = &apos;HU&apos;</code></pre>
+WHERE Status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -314,7 +314,7 @@ WHERE TIME != 0</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Latitude, Longitude FROM atlantic
-WHERE Status != &apos;HU&apos;</code></pre>
+WHERE Status NOT LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -374,7 +374,7 @@ WHERE Name LIKE &apos;___&apos;</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
-WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
+WHERE Name LIKE &apos;%e%i%&apos; OR Name LIKE &apos;%i%e%&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -386,7 +386,8 @@ WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE [Maximum Wind] = 80 OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -98 AND -99)</code></pre>
+WHERE [Maximum Wind] = 80
+OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -98 AND -99)</code></pre>
             </section>
         </section>
         <section>
