@@ -70,7 +70,7 @@
                 <h1>Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name = 'Harvey'</code></pre>
+WHERE name = 'Harvey'</code></pre>
             </section>
         </section>
         <section id="not-equal">
@@ -83,9 +83,9 @@
                 <h1>Not Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name &lt;&gt; 'Harvey'</code></pre>
+WHERE name &lt;&gt; 'Harvey'</code></pre>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name != 'Harvey'</code></pre>
+WHERE name != 'Harvey'</code></pre>
             </section>
         </section>
         <section id="greater-than">
@@ -98,7 +98,7 @@
                 <h1>Greater Than</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE latitude > 28</code></pre>
+WHERE latitude > 28</code></pre>
             </section>
         </section>
         <section id="less-than">
@@ -111,7 +111,7 @@
                 <h1>Less Than</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE latitude < 28</code></pre>
+WHERE latitude < 28</code></pre>
             </section>
         </section>
         <section id="greater-than-or-equal">
@@ -124,7 +124,7 @@
                 <h1>Greater Than or Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE latitude >= 28</code></pre>
+WHERE latitude >= 28</code></pre>
             </section>
         </section>
         <section id="less-than-or-equal">
@@ -137,7 +137,7 @@
                 <h1>Less Than or Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE latitude <= 28</code></pre>
+WHERE latitude <= 28</code></pre>
             </section>
         </section>
         <section id="between">
@@ -150,7 +150,7 @@
                 <h1>Between</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE latitude BETWEEN 28 AND 30</code></pre>
+WHERE latitude BETWEEN 28 AND 30</code></pre>
             </section>
         </section>
         <section id="in">
@@ -163,7 +163,7 @@
                 <h1>In</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE latitude IN (28, 29, 30)</code></pre>
+WHERE latitude IN (28, 29, 30)</code></pre>
             </section>
         </section>
         <section id="is">
@@ -176,7 +176,7 @@
                 <h1>Is</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE Event IS NULL</code></pre>
+WHERE Event IS NULL</code></pre>
             </section>
         </section>
         <section id="not">
@@ -189,7 +189,7 @@
                 <h1>Not</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE Event IS NOT NULL</code></pre>
+WHERE Event IS NOT NULL</code></pre>
             </section>
         </section>
         <section id="LIKE">
@@ -202,35 +202,35 @@
                 <h1>Like</h1>
                 <h2>LIKE &apos;Har%&apos;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name LIKE &apos;Har%&apos;</code></pre>
+WHERE name LIKE &apos;Har%&apos;</code></pre>
                 <p>Matches when begins with &apos;HAR&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &apos;%vey&apos;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name LIKE &apos;%vey&apos;</code></pre>
+WHERE name LIKE &apos;%vey&apos;</code></pre>
                 <p>Matches when ends with &apos;VEY&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &apos;%rve%&apos;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name LIKE &apos;%rve%&apos;</code></pre>
+WHERE name LIKE &apos;%rve%&apos;</code></pre>
                 <p>Matches when contains &apos;RVE&apos; anywhere.</p>
             </section>
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &apos;_ar%y&apos;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name LIKE &apos;_ar%y&apos;</code></pre>
+WHERE name LIKE &apos;_ar%y&apos;</code></pre>
                 <p>Matches when &apos;ar&apos; are the second and third letters and ends with a &apos;y&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
                 <h2>LIKE &apos;H_____&apos;</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE name LIKE &apos;H_____&apos;</code></pre>
+WHERE name LIKE &apos;H_____&apos;</code></pre>
                 <p>Matches when the column begins with an &apos;H&apos; and has precisely 6 letters.</p>
             </section>
         </section>
@@ -244,7 +244,7 @@
                 <h1>And</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE Event IS NOT NULL AND Status = &apos;HU&apos;</code></pre>
+WHERE Event IS NOT NULL AND Status = &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section id="or">
@@ -257,7 +257,7 @@
                 <h1>Or</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE Event IS NOT NULL OR Status = &apos;HU&apos;</code></pre>
+WHERE Event IS NOT NULL OR Status = &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -269,7 +269,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM pacific
-                    WHERE [Maximum Wind] = 80</code></pre>
+WHERE [Maximum Wind] = 80</code></pre>
             </section>
         </section>
         <section>
@@ -281,7 +281,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE Status = &apos;HU&apos;</code></pre>
+WHERE Status = &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -293,7 +293,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT Longitude, Latitude FROM atlantic
-                    WHERE TIME != 0</code></pre>
+WHERE TIME != 0</code></pre>
             </section>
         </section>
         <section>
@@ -305,7 +305,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT Latitude, Longitude FROM atlantic
-                    WHERE Status != &apos;HU&apos;</code></pre>
+WHERE Status != &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -317,7 +317,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT TOP 10 Name, Date, Time FROM atlantic
-                    WHERE [Maximum Wind] = 80 AND Time = 1200</code></pre>
+WHERE [Maximum Wind] = 80 AND Time = 1200</code></pre>
             </section>
         </section>
         <section>
@@ -329,7 +329,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
-                    WHERE [Maximum Wind] BETWEEN 75 AND 125</code></pre>
+WHERE [Maximum Wind] BETWEEN 75 AND 125</code></pre>
             </section>
         </section>
         <section>
@@ -341,7 +341,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT Date FROM atlantic
-                    WHERE latitude > 30 OR longitude < -100</code></pre>
+WHERE latitude > 30 OR longitude < -100</code></pre>
             </section>
         </section>
         <section>
@@ -353,7 +353,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name FROM atlantic
-                    WHERE Name LIKE &apos;___&apos;</code></pre>
+WHERE Name LIKE &apos;___&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -365,7 +365,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
-                    WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
+WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -377,7 +377,7 @@
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
-                    WHERE [Maximum Wind] = 80 OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -98 AND -99)</code></pre>
+WHERE [Maximum Wind] = 80 OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -98 AND -99)</code></pre>
             </section>
         </section>
         <section>
