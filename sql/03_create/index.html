@@ -46,8 +46,8 @@
 WHERE latitude = 28</code></pre>
             </section>
             <section>
-                <pre class="sql"><code>SELECT * atlantic
-WHERE latitude = 28 OR name = 'two'</code></pre>
+                <pre class="sql"><code>SELECT * FROM atlantic
+WHERE latitude = 28 OR name LIKE 'two'</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
@@ -71,13 +71,12 @@ WHERE name LIKE &apos;%vey&apos;</code></pre>
                 <h1>Create Table</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>CREATE TABLE jpr_big_storms (
-    id INT NOT NULL AUTO_INCREMENT,
+    id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(255),
     date DATETIME,
-    lat FLOAT(6,2),
-    long FLOAT(6,2),
-    max_wind INT,
-    PRIMARY KEY (id)
+    lat FLOAT,
+    long FLOAT,
+    max_wind INT
 )</code></pre>
             </section>
         </section>
@@ -138,7 +137,7 @@ WHERE [Maximum Wind] > 100</code></pre>
             </section>
             <section>
                 <h1>Insert with Select</h1>
-                <pre class="sql"><code>INSERT INTO jpr_big_stroms_2 (
+                <pre class="sql"><code>INSERT INTO jpr_big_storms_2 (
 Name, Date, Time, Latitude, Longitude, [Maximum Wind])
 SELECT Name, Date, Time, Latitude, Longitude, [Maximum Wind]
 FROM pacific
@@ -166,26 +165,25 @@ WHERE [Maximum Wind] > 100</code></pre>
                 <h1>Temporary table</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>CREATE TABLE #jpr_big_storms_4 (
-id INT NOT NULL AUTO_INCREMENT,
-name VARCHAR(255),
-date DATETIME,
-lat FLOAT(6,2),
-long FLOAT(6,2),
-max_wind INT,
-PRIMARY KEY (id)
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(255),
+    date DATETIME,
+    lat FLOAT,
+    long FLOAT,
+    max_wind INT
 )</code></pre>
             </section>
             <section>
                 <h1>Insert into temp</h1>
                 <pre class="sql"><code>INSERT INTO
-#jpr_big_storms_3 (name, date, lat, long, max_wind)
+#jpr_big_storms_4 (name, date, lat, long, max_wind)
 VALUES ('ANDREW','1992-08-28',21.5,-42.1,165),
 ('BILL','1998-09-01',20.3,-46.1,50)
 </code></pre>
             </section>
             <section>
                 <h1>Update to temp</h1>
-                <pre class="sql"><code>UPDATE #jpr_big_storms_3
+                <pre class="sql"><code>UPDATE #jpr_big_storms_4
 SET max_wind = 100
 WHERE name = 'ANDREW'                   </code></pre>
             </section>
@@ -199,8 +197,8 @@ WHERE name = 'ANDREW'                   </code></pre>
             </section>
             <section>
                 <pre class="sql"><code>CREATE TABLE xyz_places (
-lat FLOAT(6,2),
-long FLOAT(6,2)
+    lat FLOAT,
+    long FLOAT
 )</code></pre>
             </section>
         </section>
@@ -212,7 +210,7 @@ long FLOAT(6,2)
                 <p>Add all the latitude and longitudes from the atlantic table to the newly created table.</p>
             </section>
             <section>
-                <pre class="sql"><code>INSERT INTO xys_places (lat, long)
+                <pre class="sql"><code>INSERT INTO xyz_places (lat, long)
 SELECT latitude, longitude
 FROM atlantic</code></pre>
             </section>
@@ -238,8 +236,8 @@ FROM pacific</code></pre>
                 <p>Add all the atlantic rows to the previous table.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name, Date, Time, Latitude, Longitude, [Maximum Wind], [Minimum Pressure]
-INTO jpr_your_name
+                <pre class="sql"><code>INSERT INTO jpr_your_name
+SELECT Name, Date, Time, Latitude, Longitude, [Maximum Wind], [Minimum Pressure]
 FROM atlantic</code></pre>
             </section>
         </section>
@@ -266,8 +264,8 @@ WHERE [Minimum Pressure] IS NULL</code></pre>
             <section>
                 <pre class="sql"><code>CREATE TABLE #xyz_places (
 name VARCHAR(255),
-lat FLOAT(6,2),
-long FLOAT(6,2)
+lat FLOAT,
+long FLOAT
 )</code></pre>
             </section>
         </section>
@@ -311,8 +309,8 @@ AND [Low Wind NW] IS NOT NULL
                 <p>Add all the atlantic rows to the previous table where the time is midnight.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Date, Time, [Low Wind NE], [Low Wind SE], [Low Wind SW], [Low Wind NW]
-INTO #jpr_your_name
+                <pre class="sql"><code>INSERT INTO #jpr_your_name
+SELECT Date, Time, [Low Wind NE], [Low Wind SE], [Low Wind SW], [Low Wind NW]
 FROM atlantic
 WHERE time = 0                </code></pre>
             </section>
