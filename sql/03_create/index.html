@@ -68,16 +68,16 @@ WHERE name LIKE &apos;%vey&apos;</code></pre>
                 <p>Used to create a new permenant table, to avoid confusion use your initials instead of mine when doing any examples in today's session.</p>
             </section>
             <section>
-                <h1>Table</h1>
+                <h1>Create Table</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>CREATE TABLE jpr_big_storms (
-id INT NOT NULL AUTO_INCREMENT,
-name VARCHAR(255),
-date DATETIME,
-lat FLOAT(6,2),
-long FLOAT(6,2),
-max_wind INT,
-PRIMARY KEY (id)
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(255),
+    date DATETIME,
+    lat FLOAT(6,2),
+    long FLOAT(6,2),
+    max_wind INT,
+    PRIMARY KEY (id)
 )</code></pre>
             </section>
         </section>
@@ -104,6 +104,17 @@ VALUES ('ANDREW','1992-08-28',21.5,-42.1,165),
                 <h1>Update</h1>
                 <pre class="sql"><code>UPDATE jpr_big_storms
 SET max_wind = 100
+WHERE name = 'ANDREW'                   </code></pre>
+            </section>
+        </section>
+        <section id="delete">
+            <section>
+                <h1>Delete</h1>
+                <p>Used to remove rows from a table.</p>
+            </section>
+            <section>
+                <h1>Delete</h1>
+                <pre class="sql"><code>DELETE FROM jpr_big_storms
 WHERE name = 'ANDREW'                   </code></pre>
             </section>
         </section>
@@ -250,11 +261,14 @@ WHERE [Minimum Pressure] IS NULL</code></pre>
                 <h1>Exercise 6</h1>
             </section>
             <section>
-                <p>Show the names, dates and times of all the rows that have a maximum wind speed between 75 and 125</p>
+                <p>Create a temporary table called xyz_places with 2 columns for holding decimals in called lat and long, and 1 called name</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
-WHERE [Maximum Wind] BETWEEN 75 AND 125</code></pre>
+                <pre class="sql"><code>CREATE TABLE #xyz_places (
+name VARCHAR(255),
+lat FLOAT(6,2),
+long FLOAT(6,2)
+)</code></pre>
             </section>
         </section>
         <section>
@@ -262,11 +276,13 @@ WHERE [Maximum Wind] BETWEEN 75 AND 125</code></pre>
                 <h1>Exercise 7</h1>
             </section>
             <section>
-                <p>Show the date of all the rows that have a latitude greater than 30 or a longitude less than -100</p>
+                <p>Add all the name, latitude and longitudes from the atlantic table with a maximum wind greater than 105 to the newly created table.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Date FROM atlantic
-WHERE latitude > 30 OR longitude < -100</code></pre>
+                <pre class="sql"><code>INSERT INTO #xyz_places (name, lat, long)
+SELECT name, latitude, longitude
+FROM atlantic
+WHERE [Maximum Wind] > 100</code></pre>
             </section>
         </section>
         <section>
@@ -274,11 +290,17 @@ WHERE latitude > 30 OR longitude < -100</code></pre>
                 <h1>Exercise 8</h1>
             </section>
             <section>
-                <p>Show the names of all Hurricanes whose names have exactly 3 letters in</p>
+                <p>Create a temporary table with Date, Time and the Low Wind columns from pacific table with a name of your choice where the low wind speed is known.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name FROM atlantic
-WHERE Name LIKE &apos;___&apos;</code></pre>
+                <pre class="sql"><code>SELECT Date, Time, [Low Wind NE], [Low Wind SE], [Low Wind SW], [Low Wind NW]
+INTO #jpr_your_name
+FROM pacific
+WHERE [Low Wind NE] IS NOT NULL
+AND [Low Wind SW] IS NOT NULL
+AND [Low Wind SE] IS NOT NULL
+AND [Low Wind NW] IS NOT NULL
+                </code></pre>
             </section>
         </section>
         <section>
@@ -286,11 +308,13 @@ WHERE Name LIKE &apos;___&apos;</code></pre>
                 <h1>Exercise 9</h1>
             </section>
             <section>
-                <p>Show all the first 100 rows with all columns where the name contains an &apos;e&apos; and an &apos;i&apos;</p>
+                <p>Add all the atlantic rows to the previous table where the time is midnight.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
-WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
+                <pre class="sql"><code>SELECT Date, Time, [Low Wind NE], [Low Wind SE], [Low Wind SW], [Low Wind NW]
+INTO #jpr_your_name
+FROM atlantic
+WHERE time = 0                </code></pre>
             </section>
         </section>
         <section>
@@ -298,11 +322,11 @@ WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
                 <h1>Exercise 10</h1>
             </section>
             <section>
-                <p>Show all columns of all the rows that have a maximum wind speed of 80 or a latitude between 28 and 29 and a longitude between -98 and -99</p>
+                <p>Delete all the rows from the previous table where the time is not midnight</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT * FROM atlantic
-WHERE [Maximum Wind] = 80 OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -98 AND -99)</code></pre>
+                <pre class="sql"><code>DELETE FROM #jpr_your_name
+WHERE Time != 0</code></pre>
             </section>
         </section>
         <section>
