@@ -64,28 +64,28 @@
             <section>
                 <h1>Equal</h1>
                 <h2>=</h2>
-                <p>Used to compare values that are the same.</p>
+                <p>Used to compare values that are the same, numeric types only.</p>
             </section>
             <section>
                 <h1>Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE name = 'Harvey'</code></pre>
+WHERE time = 600</code></pre>
             </section>
         </section>
         <section id="not-equal">
             <section>
                 <h1>Not Equal</h1>
                 <h2>&lt;&gt; or !=</h2>
-                <p>Used to Exclude values which are not the same.</p>
+                <p>Used to Exclude values which are not the same, numeric types only.</p>
             </section>
             <section>
                 <h1>Not Equal</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE name &lt;&gt; 'Harvey'</code></pre>
+WHERE time &lt;&gt; 600</code></pre>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE name != 'Harvey'</code></pre>
+WHERE time != 600</code></pre>
             </section>
         </section>
         <section id="greater-than">
@@ -190,6 +190,8 @@ WHERE Event IS NULL</code></pre>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
 WHERE Event IS NOT NULL</code></pre>
+                <pre class="sql"><code>SELECT * FROM atlantic
+WHERE latitude NOT IN (28, 29, 30)</code></pre>
             </section>
         </section>
         <section id="LIKE">
@@ -197,6 +199,13 @@ WHERE Event IS NOT NULL</code></pre>
                 <h1>Like</h1>
                 <h2>LIKE &apos;PATTERN&apos;</h2>
                 <p>Used to select rows where the value in the named column matches the pattern provided. Normally capitals and lower case do not matter.</p>
+            </section>
+            <section>
+                <h1>Like</h1>
+                <h2>LIKE &apos;Harvey&apos;</h2>
+                <pre class="sql"><code>SELECT * FROM atlantic
+WHERE name LIKE &apos;Harvey&apos;</code></pre>
+                <p>Matches when precisely &apos;HARVEY&apos;.</p>
             </section>
             <section>
                 <h1>Like</h1>
@@ -244,7 +253,7 @@ WHERE name LIKE &apos;H_____&apos;</code></pre>
                 <h1>And</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE Event IS NOT NULL AND Status = &apos;HU&apos;</code></pre>
+WHERE Event IS NOT NULL AND Status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section id="or">
@@ -257,7 +266,7 @@ WHERE Event IS NOT NULL AND Status = &apos;HU&apos;</code></pre>
                 <h1>Or</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE Event IS NOT NULL OR Status = &apos;HU&apos;</code></pre>
+WHERE Event IS NOT NULL OR Status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -281,7 +290,7 @@ WHERE [Maximum Wind] = 80</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE Status = &apos;HU&apos;</code></pre>
+WHERE Status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -305,7 +314,7 @@ WHERE TIME != 0</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Latitude, Longitude FROM atlantic
-WHERE Status != &apos;HU&apos;</code></pre>
+WHERE Status NOT LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -313,7 +322,7 @@ WHERE Status != &apos;HU&apos;</code></pre>
                 <h1>Exercise 5</h1>
             </section>
             <section>
-                <p>Show the first 10 names, dates and times of all the rows that have a maximum wind speed of 80 and a time of midday</p>
+                <p>Show the first 10 names, dates and times of all the atlantic rows that have a maximum wind speed of 80 and a time of midday</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT TOP 10 Name, Date, Time FROM atlantic
@@ -325,7 +334,7 @@ WHERE [Maximum Wind] = 80 AND Time = 1200</code></pre>
                 <h1>Exercise 6</h1>
             </section>
             <section>
-                <p>Show the names, dates and times of all the rows that have a maximum wind speed between 75 and 125</p>
+                <p>Show the names, dates and times of all the atlantic rows that have a maximum wind speed between 75 and 125</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
@@ -337,7 +346,7 @@ WHERE [Maximum Wind] BETWEEN 75 AND 125</code></pre>
                 <h1>Exercise 7</h1>
             </section>
             <section>
-                <p>Show the date of all the rows that have a latitude greater than 30 or a longitude less than -100</p>
+                <p>Show the date of all the atlantic rows that have a latitude greater than 30 or a longitude less than -100</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Date FROM atlantic
@@ -353,7 +362,7 @@ WHERE latitude > 30 OR longitude < -100</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name FROM atlantic
-WHERE Name LIKE &apos;___&apos;</code></pre>
+WHERE Name LIKE &apos;___&apos; AND status LIKE &apos;HU&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -361,11 +370,11 @@ WHERE Name LIKE &apos;___&apos;</code></pre>
                 <h1>Exercise 9</h1>
             </section>
             <section>
-                <p>Show all the first 100 rows with all columns where the name contains an &apos;e&apos; and an &apos;i&apos;</p>
+                <p>Show all the first 100 atlantic rows with all columns where the name contains an &apos;e&apos; and an &apos;i&apos;</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name, Date, Time FROM atlantic
-WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
+WHERE Name LIKE &apos;%e%i%&apos; OR Name LIKE &apos;%i%e%&apos;</code></pre>
             </section>
         </section>
         <section>
@@ -373,11 +382,12 @@ WHERE Name LIKE &apos;%e%i%&apos; OR &apos;%i%e%&apos;</code></pre>
                 <h1>Exercise 10</h1>
             </section>
             <section>
-                <p>Show all columns of all the rows that have a maximum wind speed of 80 or a latitude between 28 and 29 and a longitude between -98 and -99</p>
+                <p>Show all columns of all the atlantic rows that have a maximum wind speed of 80 or a latitude between 28 and 29 and a longitude between -98 and -99</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT * FROM atlantic
-WHERE [Maximum Wind] = 80 OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -98 AND -99)</code></pre>
+WHERE [Maximum Wind] = 80
+OR (Latitude BETWEEN 28 AND 29 AND Longitude BETWEEN -99 AND -98)</code></pre>
             </section>
         </section>
         <section>
