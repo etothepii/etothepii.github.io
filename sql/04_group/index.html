@@ -35,8 +35,9 @@
             <section>
                 <h1>Recap</h1>
                 <ul>
-                    <li class="fragment">Last time we learned how to create tables.</li>
+                    <li class="fragment">Last time we learned how to persist data.</li>
                     <li class="fragment">We learned how to create tables.</li>
+                    <li class="fragment">We learned how to create temporary tables.</li>
                     <li class="fragment">We learned how to add rows to a table with INSERT and change values with
                         UPDATE.
                     </li>
@@ -44,7 +45,7 @@
             </section>
             <section>
                 <h1>Create Table</h1>
-                <pre class="sql"><code>CREATE TABLE jpr_big_storms (
+                <pre class="sql"><code>CREATE TABLE jpr_recap (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(255),
     date DATETIME,
@@ -54,22 +55,29 @@
 )</code></pre>
             </section>
             <section>
+                <h1>Create Temporary Table</h1>
+                <pre class="sql"><code>SELECT *
+INTO #jpr_recap
+FROM atlantic
+</code></pre>
+            </section>
+            <section>
                 <h1>Insert</h1>
                 <pre class="sql"><code>INSERT INTO
-jpr_big_storms (name, date, lat, long, max_wind)
+jpr_recap (name, date, lat, long, max_wind)
 VALUES ('ANDREW','1992-08-28',21.5,-42.1,165),
 ('BILL','1998-09-01',20.3,-46.1,50)
 </code></pre>
             </section>
             <section>
                 <h1>Update</h1>
-                <pre class="sql"><code>UPDATE jpr_big_storms
+                <pre class="sql"><code>UPDATE jpr_recap
 SET max_wind = 100
 WHERE name = 'ANDREW'                   </code></pre>
             </section>
             <section>
                 <h1>Delete</h1>
-                <pre class="sql"><code>DELETE FROM jpr_big_storms
+                <pre class="sql"><code>DELETE FROM jpr_recap
 WHERE name = 'ANDREW'                   </code></pre>
             </section>
         </section>
@@ -100,7 +108,7 @@ WHERE [Maximum Wind] > 100</code></pre>
             <section>
                 <h1>Year</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT YEAR(Date)
+                <pre class="sql"><code>SELECT YEAR(Date) year
 FROM pacific</code></pre>
             </section>
         </section>
@@ -112,7 +120,8 @@ FROM pacific</code></pre>
             <section>
                 <h1>Min</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT MIN(Latitude) min_latitude, MIN(Longitude) min_longitude
+                <pre class="sql"><code>SELECT MIN(Latitude) min_latitude,
+MIN(Longitude) min_longitude
 FROM pacific
 WHERE [Maximum Wind] > 100</code></pre>
             </section>
@@ -125,8 +134,10 @@ WHERE [Maximum Wind] > 100</code></pre>
             <section>
                 <h1>Max</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT MAX(Latitude) max_latitude, MAX(Longitude) max_longitude,
- MIN(Latitude) min_latitude, MIN(Longitude) min_longitude
+                <pre class="sql"><code>SELECT MAX(Latitude) max_latitude,
+MAX(Longitude) max_longitude,
+MIN(Latitude) min_latitude,
+MIN(Longitude) min_longitude
 FROM pacific
 WHERE [Maximum Wind] > 100</code></pre>
             </section>
@@ -139,9 +150,13 @@ WHERE [Maximum Wind] > 100</code></pre>
             <section>
                 <h1>group by</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Name, MIN(Date) start, MAX(Date) end,
-MIN(Latitude) min_latitude, MAX(Latitude) max_latitude
-MIN(Longitude) min_longitude, MAX(Longitude) max_longitude,
+                <pre class="sql"><code>SELECT Name,
+    MIN(Date) [start],
+    MAX(Date) [end],
+    MIN(Latitude) min_latitude,
+    MAX(Latitude) max_latitude,
+    MIN(Longitude) min_longitude,
+    MAX(Longitude) max_longitude
 FROM pacific
 GROUP BY Name, YEAR(Date)</code></pre>
             </section>
@@ -154,9 +169,14 @@ GROUP BY Name, YEAR(Date)</code></pre>
             <section>
                 <h1>COUNT</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Name, YEAR(Date), COUNT(*) count, Status,
-MIN(Latitude) min_latitude, MAX(Latitude) max_latitude
-MIN(Longitude) min_longitude, MAX(Longitude) max_longitude,
+                <pre class="sql"><code>SELECT Name,
+    YEAR(Date),
+    COUNT(*) count,
+    Status,
+    MIN(Latitude) min_latitude,
+    MAX(Latitude) max_latitude,
+    MIN(Longitude) min_longitude,
+    MAX(Longitude) max_longitude
 INTO #jpr_storms
 FROM atlantic
 GROUP BY Name, Year(Date), Status</code></pre>
@@ -183,9 +203,12 @@ GROUP BY Status</code></pre>
             <section>
                 <h1>AVG</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year(Date), Status,
-AVG(min_latitude) avg_min_lat, AVG(max_latitude) avg_max_lat,
-AVG(min_longitude) avg_min_long, AVG(max_longitude) avg_max_long
+                <pre class="sql"><code>SELECT Year(Date),
+    Status,
+    AVG(min_latitude) avg_min_lat,
+    AVG(max_latitude) avg_max_lat,
+    AVG(min_longitude) avg_min_long,
+    AVG(max_longitude) avg_max_long
 FROM #jpr_storms
 GROUP BY Year(Date), Status</code></pre>
             </section>
@@ -198,8 +221,9 @@ GROUP BY Year(Date), Status</code></pre>
             <section>
                 <h1>HAVING</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Name, Year(Date),
-MIN(Latitude) min_lat
+                <pre class="sql"><code>SELECT Name,
+    Year(Date),
+    MIN(Latitude) min_lat
 FROM atlantic
 GROUP BY Year(Date), Status
 HAVING MAX(Latitude) > -20</code></pre>
@@ -213,7 +237,8 @@ HAVING MAX(Latitude) > -20</code></pre>
                 <p>Find the minimum maximum wind of any Tropical Storm in the atlantic</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT MIN([Maximum Wind]) FROM atlantic WHERE status = 'TS'</code></pre>
+                <pre class="sql"><code>SELECT MIN([Maximum Wind])
+FROM atlantic WHERE status = 'TS'</code></pre>
             </section>
         </section>
         <section>
@@ -236,8 +261,11 @@ HAVING MAX(Latitude) > -20</code></pre>
                     of all pacific storms for different Maximum Wind speeds.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT MIN(Latitude) min_lat, Max(Latitude) max_lat,
-Min(Longitude) min_lon, Max(Longitude) max_lon, [Maximum Wind]
+                <pre class="sql"><code>SELECT MIN(Latitude) min_lat,
+    MAX(Latitude) max_lat,
+    MIN(Longitude) min_lon,
+    MAX(Longitude) max_lon,
+    [Maximum Wind]
 INTO #jpr_your_name
 FROM pacific
 GROUP BY [Maximum Wind]</code></pre>
@@ -251,9 +279,13 @@ GROUP BY [Maximum Wind]</code></pre>
                 <p>Create a temporary table containing the names, minimum latitude, minimum longitude and number of records for each storm in the atlantic.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name, MIN(Latitude) min_lat, MIN(Longitude) min_lon, COUNT(*) count
+                <pre class="sql"><code>SELECT Name,
+    MIN(Latitude) min_lat,
+    MIN(Longitude) min_lon,
+    COUNT(*) count
 INTO #jpr_storm_count
-FROM atlantic GROUP BY Name, Year(Date)</code></pre>
+FROM atlantic
+GROUP BY Name, Year(Date)</code></pre>
             </section>
         </section>
         <section>
@@ -277,7 +309,8 @@ WHERE Name LIKE 'X%'</code></pre>
                 <p>Using the temporary table from exercise 4 get the average minimum latitude of any storm.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT AVG(min_lat) FROM #jpr_storm_count</code></pre>
+                <pre class="sql"><code>SELECT AVG(min_lat)
+FROM #jpr_storm_count</code></pre>
             </section>
         </section>
         <section>
@@ -288,9 +321,10 @@ WHERE Name LIKE 'X%'</code></pre>
                 <p>Get a list of all atlantic storms with at least 50 measurements.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name, Year(Date)
+                <pre class="sql"><code>SELECT Name,
+    YEAR(Date)
 FROM atlantic
-GROUP BY Name, Year(Date)
+GROUP BY Name, YEAR(Date)
 HAVING count(*) > 50</code></pre>
             </section>
         </section>
@@ -303,7 +337,9 @@ HAVING count(*) > 50</code></pre>
                     atlantic storms starting east of -20</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name, YEAR(Date) MAX([Maximum Wind])
+                <pre class="sql"><code>SELECT Name,
+    YEAR(Date),
+    MAX([Maximum Wind])
 INTO #jpr_max_wind
 FROM atlantic
 GROUP BY Name, YEAR(Date)
@@ -319,7 +355,9 @@ HAVING MIN(Latitude) < -20
                 <p>Use the table from Exercise 4 to count how many times each name has been used.</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT Name, COUNT(*) FROM #jpr_storm_count</code></pre>
+                <pre class="sql"><code>SELECT Name,
+    COUNT(*) count
+FROM #jpr_storm_count</code></pre>
             </section>
         </section>
         <section>
