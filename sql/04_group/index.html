@@ -190,7 +190,7 @@ GROUP BY Name, Year(Date), Status</code></pre>
             <section>
                 <h1>SUM</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Status, SUM(count)
+                <pre class="sql"><code>SELECT Status, SUM(count) count
 FROM #jpr_storms
 GROUP BY Status</code></pre>
             </section>
@@ -203,14 +203,14 @@ GROUP BY Status</code></pre>
             <section>
                 <h1>AVG</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year(Date),
+                <pre class="sql"><code>SELECT Year,
     Status,
     AVG(min_latitude) avg_min_lat,
     AVG(max_latitude) avg_max_lat,
     AVG(min_longitude) avg_min_long,
     AVG(max_longitude) avg_max_long
 FROM #jpr_storms
-GROUP BY Year(Date), Status</code></pre>
+GROUP BY Year, Status</code></pre>
             </section>
         </section>
         <section id="having">
@@ -222,10 +222,10 @@ GROUP BY Year(Date), Status</code></pre>
                 <h1>HAVING</h1>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT Name,
-    Year(Date),
+    Year(Date) Year,
     MIN(Latitude) min_lat
 FROM atlantic
-GROUP BY Year(Date), Status
+GROUP BY Name, Year(Date), Status
 HAVING MAX(Latitude) > -20</code></pre>
             </section>
         </section>
@@ -267,7 +267,7 @@ FROM atlantic WHERE status = 'TS'</code></pre>
     MAX(Longitude) max_lon,
     [Maximum Wind]
 INTO #jpr_your_name
-FROM pacific
+FROM atlantic
 GROUP BY [Maximum Wind]</code></pre>
             </section>
         </section>
