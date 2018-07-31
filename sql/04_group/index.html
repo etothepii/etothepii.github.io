@@ -338,12 +338,12 @@ HAVING count(*) > 50</code></pre>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name,
-    YEAR(Date),
-    MAX([Maximum Wind])
+    YEAR(Date) Year,
+    MAX([Maximum Wind]) max_max_wind
 INTO #jpr_max_wind
 FROM atlantic
 GROUP BY Name, YEAR(Date)
-HAVING MIN(Latitude) < -20
+HAVING MIN(Latitude) < 10
                 </code></pre>
             </section>
         </section>
@@ -357,7 +357,8 @@ HAVING MIN(Latitude) < -20
             <section>
                 <pre class="sql"><code>SELECT Name,
     COUNT(*) count
-FROM #jpr_storm_count</code></pre>
+FROM #jpr_storm_count
+GROUP BY Name</code></pre>
             </section>
         </section>
         <section>
