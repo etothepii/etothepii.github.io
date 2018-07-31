@@ -1,0 +1,256 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CTO Lecture Series - SQL 101 - 3 Editing Data</title>
+
+    <link rel="stylesheet" href="../../css/reveal.css">
+    <link rel="stylesheet" href="../../css/theme/teal.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>CTO Lecture Series</h1>
+            <h2>SQL 101</h2>
+            <p class="author">
+                <small>Created by <a href="http://twitter.com/_jim87">James Robinson</a> for <a
+                        href="http://www.openhamilton.com">Hamilton Re</a></small>
+            </p>
+        </section>
+        <section id="recap">
+            <section>
+                <h1>Recap</h1>
+                <ul>
+                    <li class="fragment">Last time we learned how to create tables.</li>
+                    <li class="fragment">We learned how to create tables.</li>
+                    <li class="fragment">We learned how to add rows to a table with INSERT and change values with
+                        UPDATE.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h1>Create Table</h1>
+                <pre class="sql"><code>CREATE TABLE jpr_big_storms (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(255),
+    date DATETIME,
+    lat FLOAT,
+    long FLOAT,
+    max_wind INT
+)</code></pre>
+            </section>
+            <section>
+                <h1>Insert</h1>
+                <pre class="sql"><code>INSERT INTO
+jpr_big_storms (name, date, lat, long, max_wind)
+VALUES ('ANDREW','1992-08-28',21.5,-42.1,165),
+('BILL','1998-09-01',20.3,-46.1,50)
+</code></pre>
+            </section>
+            <section>
+                <h1>Update</h1>
+                <pre class="sql"><code>UPDATE jpr_big_storms
+SET max_wind = 100
+WHERE name = 'ANDREW'                   </code></pre>
+            </section>
+            <section>
+                <h1>Delete</h1>
+                <pre class="sql"><code>DELETE FROM jpr_big_storms
+WHERE name = 'ANDREW'                   </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Logging in</h1>
+            </section>
+            <section data-background="img/slide_01.png"></section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 1</h1>
+            </section>
+            <section>
+                <p>Replacing xyz with you initials, create a table called xyz_places with 2 columns for holding
+                    decimals
+                    in called lat and long</p>
+            </section>
+            <section>
+                <pre class="sql"><code>CREATE TABLE xyz_places (
+    lat FLOAT,
+    long FLOAT
+)</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 2</h1>
+            </section>
+            <section>
+                <p>Add all the latitude and longitudes from the atlantic table to the newly created table.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>INSERT INTO xyz_places (lat, long)
+SELECT latitude, longitude
+FROM atlantic</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 3</h1>
+            </section>
+            <section>
+                <p>Create a table with Name, Date, Time, Latitude, Longitude, Maximum Wind, Minimum Pressure from
+                    pacific table with a name of your choice.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name, Date, Time, Latitude, Longitude, [Maximum Wind], [Minimum Pressure]
+INTO jpr_your_name
+FROM pacific</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 4</h1>
+            </section>
+            <section>
+                <p>Add all the atlantic rows to the previous table.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>INSERT INTO jpr_your_name
+SELECT Name, Date, Time, Latitude, Longitude, [Maximum Wind], [Minimum Pressure]
+FROM atlantic</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 5</h1>
+            </section>
+            <section>
+                <p>Change all the minimum pressures that are NULL to 0</p>
+            </section>
+            <section>
+                <pre class="sql"><code>UPDATE jpr_your_name
+SET [Minimum Pressure] = 0
+WHERE [Minimum Pressure] IS NULL</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 6</h1>
+            </section>
+            <section>
+                <p>Create a temporary table called xyz_places with 2 columns for holding decimals in called lat and
+                    long, and 1 called name</p>
+            </section>
+            <section>
+                <pre class="sql"><code>CREATE TABLE #xyz_places (
+name VARCHAR(255),
+lat FLOAT,
+long FLOAT
+)</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 7</h1>
+            </section>
+            <section>
+                <p>Add all the name, latitude and longitudes from the atlantic table with a maximum wind greater
+                    than
+                    105 to the newly created table.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>INSERT INTO #xyz_places (name, lat, long)
+SELECT name, latitude, longitude
+FROM atlantic
+WHERE [Maximum Wind] > 100</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 8</h1>
+            </section>
+            <section>
+                <p>Create a temporary table with Date, Time and the Low Wind columns from pacific table with a name
+                    of
+                    your choice where the low wind speed is known.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Date, Time, [Low Wind NE], [Low Wind SE], [Low Wind SW], [Low Wind NW]
+INTO #jpr_your_name
+FROM pacific
+WHERE [Low Wind NE] IS NOT NULL
+AND [Low Wind SW] IS NOT NULL
+AND [Low Wind SE] IS NOT NULL
+AND [Low Wind NW] IS NOT NULL
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 9</h1>
+            </section>
+            <section>
+                <p>Add all the atlantic rows to the previous table where the time is midnight.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>INSERT INTO #jpr_your_name
+SELECT Date, Time, [Low Wind NE], [Low Wind SE], [Low Wind SW], [Low Wind NW]
+FROM atlantic
+WHERE time = 0                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 10</h1>
+            </section>
+            <section>
+                <p>Delete all the rows from the previous table where the time is not midnight</p>
+            </section>
+            <section>
+                <pre class="sql"><code>DELETE FROM #jpr_your_name
+WHERE Time != 0</code></pre>
+            </section>
+        </section>
+        <section>
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../../lib/js/head.min.js"></script>
+<script src="../../js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
