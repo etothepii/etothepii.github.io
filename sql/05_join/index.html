@@ -69,260 +69,224 @@ FROM pacific
 HAVING Max([Maximum Wind]) > 140
 </code></pre>
             </section>
+        </section>
+        <section>
             <section>
                 <section>
                     <h1>Logging in</h1>
                 </section>
                 <section data-background="img/slide_01.png"></section>
             </section>
-            <section id="distinct">
-                <section>
-                    <h1>Distinct</h1>
-                    <p>Used to get all the distinct entries in a database</p>
-                </section>
-                <section>
-                    <h1>Distinct</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT DISTINCT Status FROM pacific</code></pre>
-                </section>
+        </section>
+        <section id="distinct">
+            <section>
+                <h1>Distinct</h1>
+                <p>Used to get all the distinct entries in a database</p>
             </section>
-            <section id="order-by">
-                <section>
-                    <h1>ORDER BY</h1>
-                    <p>Used to order results in table</p>
-                </section>
-                <section>
-                    <h1>Order By</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
+            <section>
+                <h1>Distinct</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT DISTINCT Status FROM pacific</code></pre>
+            </section>
+        </section>
+        <section id="order-by">
+            <section>
+                <h1>ORDER BY</h1>
+                <p>Used to order results in table</p>
+            </section>
+            <section>
+                <h1>Order By</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
 FROM pacific
 ORDER BY max_wind</code></pre>
-                </section>
-                <section>
-                    <h1>Order By</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT YEAR(Date) year, Name, Min([Maximum Wind]) min_wind
+            </section>
+            <section>
+                <h1>Order By</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Min([Maximum Wind]) min_wind
 FROM pacific
 ORDER BY min_wind ASC</code></pre>
-                </section>
-                <section>
-                    <h1>Order By</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) min_wind
+            </section>
+            <section>
+                <h1>Order By</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) min_wind
 FROM pacific
 ORDER BY min_wind</code></pre>
-                </section>
             </section>
-            <section id="union">
-                <section>
-                    <h1>Union</h1>
-                    <p>Used to stitch two tables together vertically</p>
-                </section>
-                <section>
-                    <h1>Union</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
+        </section>
+        <section id="union">
+            <section>
+                <h1>Union</h1>
+                <p>Used to stitch two tables together vertically</p>
+            </section>
+            <section>
+                <h1>Union</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
 GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150
 UNION
 SELECT Year(Date) year FROM pacific
 GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150</code></pre>
-                </section>
             </section>
-            <section id="intersect">
-                <section>
-                    <h1>Intersect</h1>
-                    <p>Used to overlap two table vertically</p>
-                </section>
-                <section>
-                    <h1>Intersect</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
+        </section>
+        <section id="intersect">
+            <section>
+                <h1>Intersect</h1>
+                <p>Used to overlap two table vertically</p>
+            </section>
+            <section>
+                <h1>Intersect</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
 GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 130
 INTERSECT
 SELECT Year(Date) year FROM pacific
 GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 130</code></pre>
-                </section>
             </section>
-            <section id="table-aliases">
-                <section>
-                    <h1>Table Aliases</h1>
-                    <p>Used to create a short name for a table</p>
-                </section>
-                <section>
-                    <h1>Table Aliases Join</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT R.* FROM retired R</code></pre>
-                </section>
-            </section>
-            <section id="case">
-                <section>
-                    <h1>Case</h1>
-                    <p>Used to put a value in some circumstance.</p>
-                </section>
-                <section>
-                    <h1>Case</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT Year(A.Date), A.Name,
-CASE WHEN MIN([Minimum Pressure]) < 950 THEN 'Low' ELSE 'Normal' END</code></pre>
-                </section>
-            </section>
-            <section id="coalesce">
-                <section>
-                    <h1>Coalesce</h1>
-                    <p>Used to Set a default value</p>
-                </section>
-                <section>
-                    <h1>Coalesce</h1>
-                    <h2>Example</h2>
-                    <pre class="sql"><code>SELECT Year, Name, COALESCE(Event, '')
-FROM atlantic</code></pre>
-                </section>
+        </section>
+        <section id="table-aliases">
+            <section>
+                <h1>Table Aliases</h1>
+                <p>Used to create a short name for a table</p>
             </section>
             <section>
-                <section>
-                    <h1>Exercise 1</h1>
-                </section>
-                <section>
-                    <p>Get the all the names ever used for storms in the atlantic with a maximum wind speed of over 100</p>
-                </section>
-                <section>
+                <h1>Table Aliases Join</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT R.* FROM retired R</code></pre>
+            </section>
+        </section>
+        <section id="case">
+            <section>
+                <h1>Case</h1>
+                <p>Used to put a value in some circumstance.</p>
+            </section>
+            <section>
+                <h1>Case</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year(A.Date), A.Name,
+CASE WHEN MIN([Minimum Pressure]) < 950 THEN 'Low' ELSE 'Normal' END pressure</code></pre>
+            </section>
+        </section>
+        <section id="coalesce">
+            <section>
+                <h1>Coalesce</h1>
+                <p>Used to Set a default value</p>
+            </section>
+            <section>
+                <h1>Coalesce</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year, Name, COALESCE(Event, '') FROM atlantic
+FROM atlantic</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 1</h1>
+            </section>
+            <section>
+                <p>Get the all the names ever used for storms in the atlantic with a maximum wind speed of over
+                    100</p>
+            </section>
+            <section>
                 <pre class="sql"><code>SELECT DISTINCT Name
 FROM Atlantic WHERE [Maximum Wind] > 100</code></pre>
-                </section>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 2</h1>
             </section>
             <section>
-                <section>
-                    <h1>Exercise 2</h1>
-                </section>
-                <section>
-                    <p>Find Name, Year and Maximum Wind speed of the 5 storms with the highest wind speed in the pacific.</p>
-                </section>
-                <section>
+                <p>Find Name, Year and Maximum Wind speed of the 5 storms with the highest wind speed in the
+                    pacific.</p>
+            </section>
+            <section>
                     <pre class="sql"><code>SELECT Top 5 Name, Year(Date), MAX([Maximum Wind]) max_wind
 FROM pacific
 ORDER BY max_wind DESC
 GROUP BY Name, Year(Date)</code></pre>
-                </section>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 3</h1>
             </section>
             <section>
-                <section>
-                    <h1>Exercise 3</h1>
-                </section>
-                <section>
-                    <p>Create a list of all the statuses of storms in either the atlantic of pacific ocean</p>
-                </section>
-                <section>
+                <p>Create a list of all the statuses of storms in either the atlantic of pacific ocean</p>
+            </section>
+            <section>
                 <pre class="sql"><code>SELECT DISTINCT Status FROM atlantic
 UNION
 SELECT DISTINCT Status FROM pacific </code></pre>
-                </section>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 4</h1>
             </section>
             <section>
-                <section>
-                    <h1>Exercise 4</h1>
-                </section>
-                <section>
-                    <p>Create a list of statuses that can appear in either the atlantic or pacific oceans</p>
-                </section>
-                <section>
+                <p>Create a list of statuses that can appear in either the atlantic or pacific oceans</p>
+            </section>
+            <section>
                 <pre class="sql"><code>SELECT DISTINCT Status FROM atlantic
 INTERSECT
 SELECT DISTINCT Status FROM pacific </code></pre>
-                </section>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 5</h1>
             </section>
             <section>
-                <section>
-                    <h1>Exercise 5</h1>
-                </section>
-                <section>
-                    <p>Sum the number of Records using the, previous table, of storms begining with the letter X</p>
-                </section>
-                <section>
-                <pre class="sql"><code>SELECT SUM(count)
-FROM #jpr_storm_count
-WHERE Name LIKE 'X%'</code></pre>
-                </section>
+                <p>Use an alias to select Name and Year from the atlantic table</p>
             </section>
             <section>
-                <section>
-                    <h1>Exercise 6</h1>
-                </section>
-                <section>
-                    <p>Using the temporary table from exercise 4 get the average minimum latitude of any storm.</p>
-                </section>
-                <section>
-                <pre class="sql"><code>SELECT AVG(min_lat)
-FROM #jpr_storm_count</code></pre>
-                </section>
+                <pre class="sql"><code>SELECT A.Name, Date(A.Year) year
+FROM atlantic A</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 6</h1>
             </section>
             <section>
-                <section>
-                    <h1>Exercise 7</h1>
-                </section>
-                <section>
-                    <p>Get a list of all atlantic storms with at least 50 measurements.</p>
-                </section>
-                <section>
-                <pre class="sql"><code>SELECT Name,
-    YEAR(Date)
+                <p>List all the storms and whether it is a major storm or not.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name
+    , Year(Date)
+    , CASE WHEN Max([Maximum Windspeed]) > 110) THEN 'Major' ELSE 'Minor' END
+FROM atlantic</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 7</h1>
+            </section>
+            <section>
+                <p>List all the storms and what category of storm it is.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name
+    , YEAR(Date)
+    , CASE WHEN Max([Maximum Windspeed]) < 74 THEN 'None' ELSE
+          CASE WHEN Max([Maximum Windspeed]) < 96 THEN '1' ELSE
+              CASE WHEN Max([Maximum Windspeed]) < 111 THEN '2' ELSE
+                  CASE WHEN Max([Maximum Windspeed]) < 130 THEN '3' ELSE
+                      CASE WHEN Max([Maximum Windspeed]) < 157 THEN '4' ELSE '5' END
+                END
+            END
+        END
+    END category
 FROM atlantic
-GROUP BY Name, YEAR(Date)
-HAVING count(*) > 50</code></pre>
-                </section>
+GROUP BY Name, YEAR(Date)</code></pre>
             </section>
-            <section>
-                <section>
-                    <h1>Exercise 8</h1>
-                </section>
-                <section>
-                    <p>Create a temporary table with Name, Year, Maximum Maximum Wind of
-                        atlantic storms which go south of 10</p>
-                </section>
-                <section>
-                <pre class="sql"><code>SELECT Name,
-    YEAR(Date) Year,
-    MAX([Maximum Wind]) max_max_wind
-INTO #jpr_max_wind
-FROM atlantic
-GROUP BY Name, YEAR(Date)
-HAVING MIN(Latitude) < 10
-                </code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h1>Exercise 9</h1>
-                </section>
-                <section>
-                    <p>Use the table from Exercise 4 to count how many times each name has been used.</p>
-                </section>
-                <section>
-                <pre class="sql"><code>SELECT Name,
-    COUNT(*) count
-FROM #jpr_storm_count
-GROUP BY Name</code></pre>
-                </section>
-            </section>
-            <section>
-                <section>
-                    <h1>Exercise 10</h1>
-                </section>
-                <section>
-                    <p>Find the average most easterly latitude of a atlantic storm with a maximum wind over 125.</p>
-                </section>
-                <section>
-                <pre class="sql"><code>SELECT MAX(latitude) max_lat
-INTO #jpr_easterly
-FROM atlantic
-GROUP BY Name, YEAR(Date)
-HAVING MAX([Maximum Wind]) > 125;
-
-SELECT AVG(max_lat) FROM #jpr_easterly</code></pre>
-                </section>
-            </section>
-            <section>
-                <h1>Questions?</h1>
-            </section>
+        </section>
+        <section>
+            <h1>Questions?</h1>
+        </section>
     </div>
 </div>
 
