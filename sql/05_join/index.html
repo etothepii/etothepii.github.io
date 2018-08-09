@@ -44,9 +44,9 @@
             <section>
                 <h1>Min and Max</h1>
                 <pre class="sql"><code>SELECT MIN(Latitude) min_latitude
-    , MIN(Longitude) min_longitude,
-    , MAX(Latitude) max_latitude,
-    , MAX(Longitude) max_longitude,
+    , MIN(Longitude) min_longitude
+    , MAX(Latitude) max_latitude
+    , MAX(Longitude) max_longitude
 FROM pacific
 WHERE [Maximum Wind] > 100
 </code></pre>
@@ -66,17 +66,16 @@ GROUP BY Name, Year(Date)
                 <h1>Having</h1>
                 <pre class="sql"><code>SELECT Year(Date), Name
 FROM pacific
+GROUP BY Year(Date), Name
 HAVING Max([Maximum Wind]) > 140
 </code></pre>
             </section>
         </section>
         <section>
             <section>
-                <section>
-                    <h1>Logging in</h1>
-                </section>
-                <section data-background="img/slide_01.png"></section>
+                <h1>Logging in</h1>
             </section>
+            <section data-background="img/slide_01.png"></section>
         </section>
         <section id="distinct">
             <section>
@@ -99,6 +98,7 @@ HAVING Max([Maximum Wind]) > 140
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
 FROM pacific
+GROUP BY YEAR(Date), Name
 ORDER BY max_wind</code></pre>
             </section>
             <section>
@@ -106,14 +106,16 @@ ORDER BY max_wind</code></pre>
                 <h2>Example</h2>
                 <pre class="sql"><code>SELECT YEAR(Date) year, Name, Min([Maximum Wind]) min_wind
 FROM pacific
+GROUP BY YEAR(Date), Name
 ORDER BY min_wind ASC</code></pre>
             </section>
             <section>
                 <h1>Order By</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) min_wind
+                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
 FROM pacific
-ORDER BY min_wind</code></pre>
+GROUP BY YEAR(Date), Name
+ORDER BY max_wind DESC, year DESC</code></pre>
             </section>
         </section>
         <section id="union">
@@ -165,8 +167,16 @@ GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 130</code></pre>
             <section>
                 <h1>Case</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year(A.Date), A.Name,
-CASE WHEN MIN([Minimum Pressure]) < 950 THEN 'Low' ELSE 'Normal' END pressure</code></pre>
+                <pre class="sql"><code>SELECT Year(Date) year, Name,
+CASE
+    WHEN MIN([Minimum Pressure]) < 950 THEN
+      'Low'
+    ELSE
+      'Normal'
+    END pressure
+FROM atlantic
+GROUP BY YEAR(Date), Name
+ORDER BY year DESC</code></pre>
             </section>
         </section>
         <section id="coalesce">
@@ -177,7 +187,7 @@ CASE WHEN MIN([Minimum Pressure]) < 950 THEN 'Low' ELSE 'Normal' END pressure</c
             <section>
                 <h1>Coalesce</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year, Name, COALESCE(Event, '') FROM atlantic
+                <pre class="sql"><code>SELECT Year(Date), Name, COALESCE(Event, '') event
 FROM atlantic</code></pre>
             </section>
         </section>
@@ -205,8 +215,8 @@ FROM Atlantic WHERE [Maximum Wind] > 100</code></pre>
             <section>
                     <pre class="sql"><code>SELECT Top 5 Name, Year(Date), MAX([Maximum Wind]) max_wind
 FROM pacific
-ORDER BY max_wind DESC
-GROUP BY Name, Year(Date)</code></pre>
+GROUP BY Name, Year(Date)
+ORDER BY max_wind DESC</code></pre>
             </section>
         </section>
         <section>
@@ -243,7 +253,7 @@ SELECT DISTINCT Status FROM pacific </code></pre>
                 <p>Use an alias to select Name and Year from the atlantic table</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT A.Name, Date(A.Year) year
+                <pre class="sql"><code>SELECT A.Name, Year(A.Date) year
 FROM atlantic A</code></pre>
             </section>
         </section>
@@ -252,13 +262,15 @@ FROM atlantic A</code></pre>
                 <h1>Exercise 6</h1>
             </section>
             <section>
-                <p>List all the storms and whether it is a major storm or not.</p>
+                <p>List all the storms and whether it is a major storm or not, ordered by year, whether it was major and then in alphabetical order.</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name
-    , Year(Date)
-    , CASE WHEN Max([Maximum Windspeed]) > 110) THEN 'Major' ELSE 'Minor' END
-FROM atlantic</code></pre>
+    , Year(Date) year
+    , CASE WHEN Max([Maximum Wind]) > 110 THEN 'Major' ELSE 'Not Major' END major
+FROM atlantic
+GROUP BY Name, Year(Date)
+ORDER BY year DESC, major, name ASCc</code></pre>
             </section>
         </section>
         <section>
@@ -266,22 +278,30 @@ FROM atlantic</code></pre>
                 <h1>Exercise 7</h1>
             </section>
             <section>
-                <p>List all the storms and what category of storm it is.</p>
+                <p>List all the storms and what category of storm it is, ordered by category descending, year and name</p>
+                <ul>
+                    <li>Cat 1 is 74 to 95</li>
+                    <li>Cat 2 is 96 to 112</li>
+                    <li>Cat 3 is 112 to 130</li>
+                    <li>Cat 4 is 131 to 157</li>
+                    <li>Cat 5 is 157 and upwards</li>
+                </ul>
             </section>
             <section>
                 <pre class="sql"><code>SELECT Name
-    , YEAR(Date)
-    , CASE WHEN Max([Maximum Windspeed]) < 74 THEN 'None' ELSE
-          CASE WHEN Max([Maximum Windspeed]) < 96 THEN '1' ELSE
-              CASE WHEN Max([Maximum Windspeed]) < 111 THEN '2' ELSE
-                  CASE WHEN Max([Maximum Windspeed]) < 130 THEN '3' ELSE
-                      CASE WHEN Max([Maximum Windspeed]) < 157 THEN '4' ELSE '5' END
+    , YEAR(Date) year
+    , CASE WHEN Max([Maximum Wind]) < 74 THEN 0 ELSE
+          CASE WHEN Max([Maximum Wind]) < 96 THEN 1 ELSE
+              CASE WHEN Max([Maximum Wind]) < 111 THEN 2 ELSE
+                  CASE WHEN Max([Maximum Wind]) < 130 THEN 3 ELSE
+                      CASE WHEN Max([Maximum Wind]) < 157 THEN 4 ELSE 5 END
                 END
             END
         END
     END category
 FROM atlantic
-GROUP BY Name, YEAR(Date)</code></pre>
+GROUP BY Name, YEAR(Date)
+ORDER BY category DESC, year, Name ASC</code></pre>
             </section>
         </section>
         <section>
