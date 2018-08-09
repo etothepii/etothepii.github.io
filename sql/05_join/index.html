@@ -1,0 +1,405 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CTO Lecture Series - SQL 101 - 5 Joining Data</title>
+
+    <link rel="stylesheet" href="../../css/reveal.css">
+    <link rel="stylesheet" href="../../css/theme/teal.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>CTO Lecture Series</h1>
+            <h2>SQL 101</h2>
+            <p class="author">
+                <small>Created by <a href="http://twitter.com/_jim87">James Robinson</a> for <a
+                        href="http://www.openhamilton.com">Hamilton Re</a></small>
+            </p>
+        </section>
+        <section id="recap">
+            <section>
+                <h1>Recap</h1>
+                <ul>
+                    <li class="fragment">Last time we learned how to group by.</li>
+                    <li class="fragment">We learned how to use Min and Max.</li>
+                    <li class="fragment">We learned how to Count, Sum and Avg.</li>
+                    <li class="fragment">We learned how to filter on these requirements with Having.</li>
+                </ul>
+            </section>
+            <section>
+                <h1>Min and Max</h1>
+                <pre class="sql"><code>SELECT MIN(Latitude) min_latitude
+    , MIN(Longitude) min_longitude,
+    , MAX(Latitude) max_latitude,
+    , MAX(Longitude) max_longitude,
+FROM pacific
+WHERE [Maximum Wind] > 100
+</code></pre>
+            </section>
+            <section>
+                <h1>Count, Sum and Avg</h1>
+                <pre class="sql"><code>SELECT *
+INTO #jpr_recap
+FROM atlantic
+</code></pre>
+            </section>
+            <section>
+                <h1>Insert</h1>
+                <pre class="sql"><code>INSERT INTO
+jpr_recap (name, date, lat, long, max_wind)
+VALUES ('ANDREW','1992-08-28',21.5,-42.1,165),
+('BILL','1998-09-01',20.3,-46.1,50)
+</code></pre>
+            </section>
+            <section>
+                <h1>Update</h1>
+                <pre class="sql"><code>UPDATE jpr_recap
+SET max_wind = 100
+WHERE name = 'ANDREW'                   </code></pre>
+            </section>
+            <section>
+                <h1>Delete</h1>
+                <pre class="sql"><code>DELETE FROM jpr_recap
+WHERE name = 'ANDREW'                   </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Logging in</h1>
+            </section>
+            <section data-background="img/slide_01.png"></section>
+        </section>
+        <section id="aliases">
+            <section>
+                <h1>Aliases</h1>
+                <p>Used to rename a column</p>
+            </section>
+            <section>
+                <h1>Aliases</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Latitude my_latitude, Longitude AS my_longitude
+FROM pacific
+WHERE [Maximum Wind] > 100</code></pre>
+            </section>
+        </section>
+        <section id="Year">
+            <section>
+                <h1>YEAR</h1>
+                <p>Extracts the year from a date</p>
+            </section>
+            <section>
+                <h1>Year</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT YEAR(Date) year
+FROM pacific</code></pre>
+            </section>
+        </section>
+        <section id="min">
+            <section>
+                <h1>Min</h1>
+                <p>Used to find the smallest value within a column or subsection of a column</p>
+            </section>
+            <section>
+                <h1>Min</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT MIN(Latitude) min_latitude,
+MIN(Longitude) min_longitude
+FROM pacific
+WHERE [Maximum Wind] > 100</code></pre>
+            </section>
+        </section>
+        <section id="max">
+            <section>
+                <h1>Max</h1>
+                <p>Used to find the largest value within a column or subsection of columns</p>
+            </section>
+            <section>
+                <h1>Max</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT MAX(Latitude) max_latitude,
+MAX(Longitude) max_longitude,
+MIN(Latitude) min_latitude,
+MIN(Longitude) min_longitude
+FROM pacific
+WHERE [Maximum Wind] > 100</code></pre>
+            </section>
+        </section>
+        <section id="group-by">
+            <section>
+                <h1>GROUP BY</h1>
+                <p>Used to partition up a table.</p>
+            </section>
+            <section>
+                <h1>group by</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Name,
+    MIN(Date) [start],
+    MAX(Date) [end],
+    MIN(Latitude) min_latitude,
+    MAX(Latitude) max_latitude,
+    MIN(Longitude) min_longitude,
+    MAX(Longitude) max_longitude
+FROM pacific
+GROUP BY Name, YEAR(Date)</code></pre>
+            </section>
+        </section>
+        <section id="count">
+            <section>
+                <h1>COUNT</h1>
+                <p>Used to find the number of rows within a column or subsection of columns that are not null.</p>
+            </section>
+            <section>
+                <h1>COUNT</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Name,
+    YEAR(Date) year,
+    COUNT(*) count,
+    Status,
+    MIN(Latitude) min_latitude,
+    MAX(Latitude) max_latitude,
+    MIN(Longitude) min_longitude,
+    MAX(Longitude) max_longitude
+INTO #jpr_storms
+FROM atlantic
+GROUP BY Name, Year(Date), Status</code></pre>
+            </section>
+        </section>
+        <section id="sum">
+            <section>
+                <h1>SUM</h1>
+                <p>Used to add up all the values in a column or subsection of columns that are not null.</p>
+            </section>
+            <section>
+                <h1>SUM</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Status, SUM(count) count
+FROM #jpr_storms
+GROUP BY Status</code></pre>
+            </section>
+        </section>
+        <section id="avg">
+            <section>
+                <h1>AVG</h1>
+                <p>Used to average all the values in a column or subsection of columns that are not null.</p>
+            </section>
+            <section>
+                <h1>AVG</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year,
+    Status,
+    AVG(min_latitude) avg_min_lat,
+    AVG(max_latitude) avg_max_lat,
+    AVG(min_longitude) avg_min_long,
+    AVG(max_longitude) avg_max_long
+FROM #jpr_storms
+GROUP BY Year, Status</code></pre>
+            </section>
+        </section>
+        <section id="having">
+            <section>
+                <h1>HAVING</h1>
+                <p>Used to do filtering (like WHERE) on grouped values.</p>
+            </section>
+            <section>
+                <h1>HAVING</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Name,
+    Year(Date) Year,
+    MIN(Latitude) min_lat
+FROM atlantic
+GROUP BY Name, Year(Date), Status
+HAVING MAX(Latitude) > -20</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 1</h1>
+            </section>
+            <section>
+                <p>Find the minimum maximum wind of any Tropical Storm in the atlantic</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT MIN([Maximum Wind])
+FROM atlantic WHERE status = 'TS'</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 2</h1>
+            </section>
+            <section>
+                <p>Find the maximum minimum pressure recorded in the pacific</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT MAX([Minimum Pressure]) FROM pacific</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 3</h1>
+            </section>
+            <section>
+                <p>Create a temporary table with Minimum Latitude, Maximum Latitude, Minimum Longitude, Maximum Longitude
+                    of all pacific storms for different Maximum Wind speeds.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT MIN(Latitude) min_lat,
+    MAX(Latitude) max_lat,
+    MIN(Longitude) min_lon,
+    MAX(Longitude) max_lon,
+    [Maximum Wind]
+INTO #jpr_your_name
+FROM atlantic
+GROUP BY [Maximum Wind]</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 4</h1>
+            </section>
+            <section>
+                <p>Create a temporary table containing the names, minimum latitude, minimum longitude and number of records for each storm in the atlantic.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name,
+    MIN(Latitude) min_lat,
+    MIN(Longitude) min_lon,
+    COUNT(*) count
+INTO #jpr_storm_count
+FROM atlantic
+GROUP BY Name, Year(Date)</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 5</h1>
+            </section>
+            <section>
+                <p>Sum the number of Records using the, previous table, of storms begining with the letter X</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT SUM(count)
+FROM #jpr_storm_count
+WHERE Name LIKE 'X%'</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 6</h1>
+            </section>
+            <section>
+                <p>Using the temporary table from exercise 4 get the average minimum latitude of any storm.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT AVG(min_lat)
+FROM #jpr_storm_count</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 7</h1>
+            </section>
+            <section>
+                <p>Get a list of all atlantic storms with at least 50 measurements.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name,
+    YEAR(Date)
+FROM atlantic
+GROUP BY Name, YEAR(Date)
+HAVING count(*) > 50</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 8</h1>
+            </section>
+            <section>
+                <p>Create a temporary table with Name, Year, Maximum Maximum Wind of
+                    atlantic storms which go south of 10</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name,
+    YEAR(Date) Year,
+    MAX([Maximum Wind]) max_max_wind
+INTO #jpr_max_wind
+FROM atlantic
+GROUP BY Name, YEAR(Date)
+HAVING MIN(Latitude) < 10
+                </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 9</h1>
+            </section>
+            <section>
+                <p>Use the table from Exercise 4 to count how many times each name has been used.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name,
+    COUNT(*) count
+FROM #jpr_storm_count
+GROUP BY Name</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 10</h1>
+            </section>
+            <section>
+                <p>Find the average most easterly latitude of a atlantic storm with a maximum wind over 125.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT MAX(latitude) max_lat
+INTO #jpr_easterly
+FROM atlantic
+GROUP BY Name, YEAR(Date)
+HAVING MAX([Maximum Wind]) > 125;
+
+SELECT AVG(max_lat) FROM #jpr_easterly</code></pre>
+            </section>
+        </section>
+        <section>
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../../lib/js/head.min.js"></script>
+<script src="../../js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
