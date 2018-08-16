@@ -79,7 +79,7 @@ ORDER BY year DESC
             </section>
             <section data-background="img/slide_01.png"></section>
         </section>
-        <section id="join">
+        <section id="joins">
             <section>
                 <h1>Joins</h1>
                 <p>Used to join tables horizontally.</p>
@@ -89,107 +89,114 @@ ORDER BY year DESC
                 <img src="img/slide_02.png">
             </section>
         </section>
-        <section id="order-by">
+        <section id="inner-join">
             <section>
-                <h1>ORDER BY</h1>
-                <p>Used to order results in table</p>
+                <h1>Inner Join</h1>
+                <p>Used to get the results only in both tables</p>
+                <img src="img/slide_03.png">
             </section>
             <section>
-                <h1>Order By</h1>
+                <h1>Inner join</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
-FROM pacific
-GROUP BY YEAR(Date), Name
-ORDER BY max_wind</code></pre>
+                <pre class="sql"><code>SELECT * FROM table_a A
+INNER JOIN table_b B
+ON A.name = B.name</code></pre>
             </section>
             <section>
-                <h1>Order By</h1>
-                <h2>Example</h2>
-                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Min([Maximum Wind]) min_wind
-FROM pacific
-GROUP BY YEAR(Date), Name
-ORDER BY min_wind ASC</code></pre>
-            </section>
-            <section>
-                <h1>Order By</h1>
-                <h2>Example</h2>
-                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
-FROM pacific
-GROUP BY YEAR(Date), Name
-ORDER BY max_wind DESC, year DESC</code></pre>
+                <h1>Inner Join</h1>
+                <img src="img/slide_04.png">
             </section>
         </section>
-        <section id="union">
+        <section id="full-outer-join">
             <section>
-                <h1>Union</h1>
-                <p>Used to stitch two tables together vertically</p>
+                <h1>Full Outer Join</h1>
+                <p>Used to get the results that exist in either side.</p>
+                <img src="img/slide_05.png">
             </section>
             <section>
-                <h1>Union</h1>
+                <h1>Inner join</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
-GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150
-UNION
-SELECT Year(Date) year FROM pacific
-GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150</code></pre>
+                <pre class="sql"><code>SELECT * FROM table_a A
+FULL OUTER JOIN table_b B
+ON A.name = B.name</code></pre>
+            </section>
+            <section>
+                <h1>Inner Join</h1>
+                <img src="img/slide_06.png">
             </section>
         </section>
-        <section id="intersect">
+        <section id="left-join">
             <section>
-                <h1>Intersect</h1>
-                <p>Used to overlap two table vertically</p>
+                <h1>Left Join</h1>
+                <p>Used to get the results only in the left table</p>
+                <img src="img/slide_07.png">
             </section>
             <section>
-                <h1>Intersect</h1>
+                <h1>Left join</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
-GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 130
-INTERSECT
-SELECT Year(Date) year FROM pacific
-GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 130</code></pre>
+                <pre class="sql"><code>SELECT * FROM table_a A
+LEFT OUTER JOIN table_b B
+ON A.name = B.name</code></pre>
+            </section>
+            <section>
+                <h1>Left Join</h1>
+                <img src="img/slide_08.png">
             </section>
         </section>
-        <section id="table-aliases">
+        <section id="filtered-left-join">
             <section>
-                <h1>Table Aliases</h1>
-                <p>Used to create a short name for a table</p>
+                <h1>Filtered Left Join</h1>
+                <p>Used to get the results only in left table</p>
+                <img src="img/slide_09.png">
             </section>
             <section>
-                <h1>Table Aliases Join</h1>
+                <h1>Filtered Left join</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT R.* FROM retired R</code></pre>
+                <pre class="sql"><code>SELECT * FROM table_a A
+LEFT OUTER JOIN table_b B
+ON A.name = B.name
+WHERE table_b B.id IS null</code></pre>
+            </section>
+            <section>
+                <h1>Filtered Left Join</h1>
+                <img src="img/slide_10.png">
             </section>
         </section>
-        <section id="case">
+        <section id="filtered-full-outer-join">
             <section>
-                <h1>Case</h1>
-                <p>Used to put a value in some circumstance.</p>
+                <h1>Filtered Full OUter Join</h1>
+                <p>Used to get the results only in one table</p>
+                <img src="img/slide_11.png">
             </section>
             <section>
-                <h1>Case</h1>
+                <h1>Filtered Full Outer Join</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year(Date) year, Name,
-CASE
-    WHEN MIN([Minimum Pressure]) < 950 THEN
-      'Low'
-    ELSE
-      'Normal'
-    END pressure
-FROM atlantic
-GROUP BY YEAR(Date), Name
-ORDER BY year DESC</code></pre>
+                <pre class="sql"><code>SELECT * FROM table_a A
+FULL OUTER JOIN table_b B
+ON A.name = B.name
+WHERE table_a A.id IS null
+OR table_b B.id IS null</code></pre>
+            </section>
+            <section>
+                <h1>Filtered Outer Join</h1>
+                <img src="img/slide_12.png">
             </section>
         </section>
-        <section id="coalesce">
+        <section id="cross-join">
             <section>
-                <h1>Coalesce</h1>
-                <p>Used to Set a default value</p>
+                <h1>Cross Join</h1>
+                <p>Used to get every row in each table paired with every row in the other table.</p>
+                <p>There is no good venn diagram analogy for this.</p>
             </section>
             <section>
-                <h1>Coalesce</h1>
+                <h1>Cross join</h1>
                 <h2>Example</h2>
-                <pre class="sql"><code>SELECT Year(Date), Name, COALESCE(Event, '') event
-FROM atlantic</code></pre>
+                <pre class="sql"><code>SELECT * FROM table_a A
+CROSS JOIN table_b B</code></pre>
+            </section>
+            <section>
+                <h1>Cross Join</h1>
+                <img src="img/slide_13.png">
             </section>
         </section>
         <section>
