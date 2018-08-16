@@ -241,12 +241,16 @@ CROSS JOIN table_b B</code></pre>
                 <h1>Exercise 1</h1>
             </section>
             <section>
-                <p>Get the all the names ever used for storms in the atlantic with a maximum wind speed of over
-                    100</p>
+                <p>Each record in the table department represents a department which might hire some employees. Each record in the table employee represents an employee who works for one of the departments from the table department. The salary of each employee is known. (However, the locations of the departments are not relevant here.)</p>
+                <p>Write an SQL query that returns a table comprising all the departments (dept_id) in the table department that hire at least one employee, the number of people they employ and the sum of salaries in each department. The table should be ordered by dept_id (in increasing order)</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT DISTINCT Name
-FROM Atlantic WHERE [Maximum Wind] > 100</code></pre>
+                <pre class="sql"><code>SELECT dept_id, count(*) count, sum(salary) sum_of_salary
+FROM employee
+GROUP BY dept_id</code></pre>
+            </section>
+            <section>
+                <img src="img/slide_19.png">
             </section>
         </section>
         <section>
@@ -254,99 +258,36 @@ FROM Atlantic WHERE [Maximum Wind] > 100</code></pre>
                 <h1>Exercise 2</h1>
             </section>
             <section>
-                <p>Find Name, Year and Maximum Wind speed of the 5 storms with the highest wind speed in the
-                    pacific.</p>
+                <p>Each record in the table department represents a department which might hire some employees. Each record in the table employee represents an employee who works for one of the departments from the table department. The salary of each employee is known. (However, the locations of the departments are not relevant here.)</p>
+                <p>Write an SQL query that returns a table comprising all the departments (dept_id) in the table department, the number of people they employ and the sum of salaries in each department. The table should be ordered by dept_id (in increasing order)</p>
             </section>
             <section>
-                    <pre class="sql"><code>SELECT Top 5 Name, Year(Date), MAX([Maximum Wind]) max_wind
-FROM pacific
-GROUP BY Name, Year(Date)
-ORDER BY max_wind DESC</code></pre>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h1>Exercise 3</h1>
+                <pre class="sql"><code>SELECT d.dept_id, count(e.dept_id) count, coalesce(sum(salary),0) sum_of_salary
+FROM department d LEFT JOIN employee E ON d.dept_id = e.dept_id
+GROUP BY d.dept_id</code></pre>
             </section>
             <section>
-                <p>Create a list of all the statuses of storms in either the atlantic of pacific ocean</p>
-            </section>
-            <section>
-                <pre class="sql"><code>SELECT DISTINCT Status FROM atlantic
-UNION
-SELECT DISTINCT Status FROM pacific </code></pre>
+                <img src="img/slide_18.png">
             </section>
         </section>
         <section>
             <section>
-                <h1>Exercise 4</h1>
+                <h1>Exercise 2</h1>
             </section>
             <section>
-                <p>Create a list of statuses that can appear in either the atlantic or pacific oceans</p>
+                <p>You would like to compute the total number of tickets sold for each movie. Then you would like to rank all movies by popularity.</p>
+                <p>Write an SQL query that returns a popularity ranking of all movies described in any row of the table movies. For each movie you should provide its id and title and the total number of tickets sold for it (sold_tickets). The table should be ordered by its sold_tickets column (in decreasing order). In case of a tie, order the rows by the id column (in increasing order).</p>
             </section>
             <section>
-                <pre class="sql"><code>SELECT DISTINCT Status FROM atlantic
-INTERSECT
-SELECT DISTINCT Status FROM pacific </code></pre>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h1>Exercise 5</h1>
+                <pre class="sql"><code>SELECT M.id, M.title, COALESCE(SUM(R.number_of_tickets), 0) AS sold_tickets
+FROM movies M
+LEFT JOIN reservations R
+ON M.id = R.movie_id
+GROUP BY M.id, M.title
+ORDER BY sold_tickets DESC, id</code></pre>
             </section>
             <section>
-                <p>Use an alias to select Name and Year from the atlantic table</p>
-            </section>
-            <section>
-                <pre class="sql"><code>SELECT A.Name, Year(A.Date) year
-FROM atlantic A</code></pre>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h1>Exercise 6</h1>
-            </section>
-            <section>
-                <p>List all the storms and whether it is a major storm or not, ordered by year, whether it was major and then in alphabetical order.</p>
-            </section>
-            <section>
-                <pre class="sql"><code>SELECT Name
-    , Year(Date) year
-    , CASE WHEN Max([Maximum Wind]) > 110 THEN 'Major' ELSE 'Not Major' END major
-FROM atlantic
-GROUP BY Name, Year(Date)
-ORDER BY year DESC, major, name ASC</code></pre>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h1>Exercise 7</h1>
-            </section>
-            <section>
-                <p>List all the storms and what category of storm it is, ordered by category descending, year and name</p>
-                <ul>
-                    <li>Cat 1 is 74 to 95</li>
-                    <li>Cat 2 is 96 to 112</li>
-                    <li>Cat 3 is 112 to 130</li>
-                    <li>Cat 4 is 131 to 157</li>
-                    <li>Cat 5 is 157 and upwards</li>
-                </ul>
-            </section>
-            <section>
-                <pre class="sql"><code>SELECT Name
-    , YEAR(Date) year
-    , CASE WHEN Max([Maximum Wind]) < 74 THEN 0 ELSE
-          CASE WHEN Max([Maximum Wind]) < 96 THEN 1 ELSE
-              CASE WHEN Max([Maximum Wind]) < 111 THEN 2 ELSE
-                  CASE WHEN Max([Maximum Wind]) < 130 THEN 3 ELSE
-                      CASE WHEN Max([Maximum Wind]) < 157 THEN 4 ELSE 5 END
-                END
-            END
-        END
-    END category
-FROM atlantic
-GROUP BY Name, YEAR(Date)
-ORDER BY category DESC, year, Name ASC</code></pre>
+                <img src="img/slide_20.png">
             </section>
         </section>
         <section>
