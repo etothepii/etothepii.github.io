@@ -241,8 +241,8 @@ CROSS JOIN table_b B</code></pre>
                 <h1>Exercise 1</h1>
             </section>
             <section>
-                <p>Each record in the table department represents a department which might hire some employees. Each record in the table employee represents an employee who works for one of the departments from the table department. The salary of each employee is known. (However, the locations of the departments are not relevant here.)</p>
-                <p>Write an SQL query that returns a table comprising all the departments (dept_id) in the table department that hire at least one employee, the number of people they employ and the sum of salaries in each department. The table should be ordered by dept_id (in increasing order)</p>
+                <p class="question">Each record in the table department represents a department which might hire some employees. Each record in the table employee represents an employee who works for one of the departments from the table department. The salary of each employee is known. (However, the locations of the departments are not relevant here.)</p>
+                <p class="question">Write an SQL query that returns a table comprising all the departments (dept_id) in the table department that hire at least one employee, the number of people they employ and the sum of salaries in each department. The table should be ordered by dept_id (in increasing order)</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT dept_id, count(*) count, sum(salary) sum_of_salary
@@ -258,8 +258,8 @@ GROUP BY dept_id</code></pre>
                 <h1>Exercise 2</h1>
             </section>
             <section>
-                <p>Each record in the table department represents a department which might hire some employees. Each record in the table employee represents an employee who works for one of the departments from the table department. The salary of each employee is known. (However, the locations of the departments are not relevant here.)</p>
-                <p>Write an SQL query that returns a table comprising all the departments (dept_id) in the table department, the number of people they employ and the sum of salaries in each department. The table should be ordered by dept_id (in increasing order)</p>
+                <p class="question">Each record in the table department represents a department which might hire some employees. Each record in the table employee represents an employee who works for one of the departments from the table department. The salary of each employee is known. (However, the locations of the departments are not relevant here.)</p>
+                <p class="question">Write an SQL query that returns a table comprising all the departments (dept_id) in the table department, the number of people they employ and the sum of salaries in each department. The table should be ordered by dept_id (in increasing order)</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT d.dept_id, count(e.dept_id) count, coalesce(sum(salary),0) sum_of_salary
@@ -275,8 +275,8 @@ GROUP BY d.dept_id</code></pre>
                 <h1>Exercise 3</h1>
             </section>
             <section>
-                <p>You would like to compute the total number of tickets sold for each movie. Then you would like to rank all movies by popularity.</p>
-                <p>Write an SQL query that returns a popularity ranking of all movies described in any row of the table movies. For each movie you should provide its id and title and the total number of tickets sold for it (sold_tickets). The table should be ordered by its sold_tickets column (in decreasing order). In case of a tie, order the rows by the id column (in increasing order).</p>
+                <p class="question">You would like to compute the total number of tickets sold for each movie. Then you would like to rank all movies by popularity.</p>
+                <p class="question">Write an SQL query that returns a popularity ranking of all movies described in any row of the table movies. For each movie you should provide its id and title and the total number of tickets sold for it (sold_tickets). The table should be ordered by its sold_tickets column (in decreasing order). In case of a tie, order the rows by the id column (in increasing order).</p>
             </section>
             <section>
                 <pre class="sql"><code>SELECT M.id, M.title, COALESCE(SUM(R.number_of_tickets), 0) AS sold_tickets
