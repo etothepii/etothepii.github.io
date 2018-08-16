@@ -1,0 +1,334 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>CTO Lecture Series - SQL 101 - 5 Joining Data</title>
+
+    <link rel="stylesheet" href="../../css/reveal.css">
+    <link rel="stylesheet" href="../../css/theme/teal.css">
+
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="../../lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h1>CTO Lecture Series</h1>
+            <h2>SQL 101</h2>
+            <p class="author">
+                <small>Created by <a href="http://twitter.com/_jim87">James Robinson</a> for <a
+                        href="http://www.openhamilton.com">Hamilton Re</a></small>
+            </p>
+        </section>
+        <section id="recap">
+            <section>
+                <h1>Recap</h1>
+                <ul>
+                    <li class="fragment">Last time we learned how to group by.</li>
+                    <li class="fragment">We learned how to use Min and Max.</li>
+                    <li class="fragment">We learned how to Count, Sum and Avg.</li>
+                    <li class="fragment">We learned how to filter on these requirements with Having.</li>
+                </ul>
+            </section>
+            <section>
+                <h1>Min and Max</h1>
+                <pre class="sql"><code>SELECT MIN(Latitude) min_latitude
+    , MIN(Longitude) min_longitude
+    , MAX(Latitude) max_latitude
+    , MAX(Longitude) max_longitude
+FROM pacific
+WHERE [Maximum Wind] > 100
+</code></pre>
+            </section>
+            <section>
+                <h1>Count, Sum and Avg</h1>
+                <pre class="sql"><code>SELECT Year(Date)
+    , Name
+    , Count(*) count
+    , Sum([Maximum Wind]) sum
+    , Avg([Maximum Wind]) avg
+FROM atlantic
+GROUP BY Name, Year(Date)
+</code></pre>
+            </section>
+            <section>
+                <h1>Having</h1>
+                <pre class="sql"><code>SELECT Year(Date), Name
+FROM pacific
+GROUP BY Year(Date), Name
+HAVING Max([Maximum Wind]) > 140
+</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Logging in</h1>
+            </section>
+            <section data-background="img/slide_01.png"></section>
+        </section>
+        <section id="distinct">
+            <section>
+                <h1>Distinct</h1>
+                <p>Used to get all the distinct entries in a database</p>
+            </section>
+            <section>
+                <h1>Distinct</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT DISTINCT Status FROM pacific</code></pre>
+            </section>
+        </section>
+        <section id="order-by">
+            <section>
+                <h1>ORDER BY</h1>
+                <p>Used to order results in table</p>
+            </section>
+            <section>
+                <h1>Order By</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
+FROM pacific
+GROUP BY YEAR(Date), Name
+ORDER BY max_wind</code></pre>
+            </section>
+            <section>
+                <h1>Order By</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Min([Maximum Wind]) min_wind
+FROM pacific
+GROUP BY YEAR(Date), Name
+ORDER BY min_wind ASC</code></pre>
+            </section>
+            <section>
+                <h1>Order By</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT YEAR(Date) year, Name, Max([Maximum Wind]) max_wind
+FROM pacific
+GROUP BY YEAR(Date), Name
+ORDER BY max_wind DESC, year DESC</code></pre>
+            </section>
+        </section>
+        <section id="union">
+            <section>
+                <h1>Union</h1>
+                <p>Used to stitch two tables together vertically</p>
+            </section>
+            <section>
+                <h1>Union</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
+GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150
+UNION
+SELECT Year(Date) year FROM pacific
+GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150</code></pre>
+            </section>
+        </section>
+        <section id="intersect">
+            <section>
+                <h1>Intersect</h1>
+                <p>Used to overlap two table vertically</p>
+            </section>
+            <section>
+                <h1>Intersect</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
+GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 130
+INTERSECT
+SELECT Year(Date) year FROM pacific
+GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 130</code></pre>
+            </section>
+        </section>
+        <section id="table-aliases">
+            <section>
+                <h1>Table Aliases</h1>
+                <p>Used to create a short name for a table</p>
+            </section>
+            <section>
+                <h1>Table Aliases Join</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT R.* FROM retired R</code></pre>
+            </section>
+        </section>
+        <section id="case">
+            <section>
+                <h1>Case</h1>
+                <p>Used to put a value in some circumstance.</p>
+            </section>
+            <section>
+                <h1>Case</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year(Date) year, Name,
+CASE
+    WHEN MIN([Minimum Pressure]) < 950 THEN
+      'Low'
+    ELSE
+      'Normal'
+    END pressure
+FROM atlantic
+GROUP BY YEAR(Date), Name
+ORDER BY year DESC</code></pre>
+            </section>
+        </section>
+        <section id="coalesce">
+            <section>
+                <h1>Coalesce</h1>
+                <p>Used to Set a default value</p>
+            </section>
+            <section>
+                <h1>Coalesce</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT Year(Date), Name, COALESCE(Event, '') event
+FROM atlantic</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 1</h1>
+            </section>
+            <section>
+                <p>Get the all the names ever used for storms in the atlantic with a maximum wind speed of over
+                    100</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT DISTINCT Name
+FROM Atlantic WHERE [Maximum Wind] > 100</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 2</h1>
+            </section>
+            <section>
+                <p>Find Name, Year and Maximum Wind speed of the 5 storms with the highest wind speed in the
+                    pacific.</p>
+            </section>
+            <section>
+                    <pre class="sql"><code>SELECT Top 5 Name, Year(Date), MAX([Maximum Wind]) max_wind
+FROM pacific
+GROUP BY Name, Year(Date)
+ORDER BY max_wind DESC</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 3</h1>
+            </section>
+            <section>
+                <p>Create a list of all the statuses of storms in either the atlantic of pacific ocean</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT DISTINCT Status FROM atlantic
+UNION
+SELECT DISTINCT Status FROM pacific </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 4</h1>
+            </section>
+            <section>
+                <p>Create a list of statuses that can appear in either the atlantic or pacific oceans</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT DISTINCT Status FROM atlantic
+INTERSECT
+SELECT DISTINCT Status FROM pacific </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 5</h1>
+            </section>
+            <section>
+                <p>Use an alias to select Name and Year from the atlantic table</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT A.Name, Year(A.Date) year
+FROM atlantic A</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 6</h1>
+            </section>
+            <section>
+                <p>List all the storms and whether it is a major storm or not, ordered by year, whether it was major and then in alphabetical order.</p>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name
+    , Year(Date) year
+    , CASE WHEN Max([Maximum Wind]) > 110 THEN 'Major' ELSE 'Not Major' END major
+FROM atlantic
+GROUP BY Name, Year(Date)
+ORDER BY year DESC, major, name ASCc</code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h1>Exercise 7</h1>
+            </section>
+            <section>
+                <p>List all the storms and what category of storm it is, ordered by category descending, year and name</p>
+                <ul>
+                    <li>Cat 1 is 74 to 95</li>
+                    <li>Cat 2 is 96 to 112</li>
+                    <li>Cat 3 is 112 to 130</li>
+                    <li>Cat 4 is 131 to 157</li>
+                    <li>Cat 5 is 157 and upwards</li>
+                </ul>
+            </section>
+            <section>
+                <pre class="sql"><code>SELECT Name
+    , YEAR(Date) year
+    , CASE WHEN Max([Maximum Wind]) < 74 THEN 0 ELSE
+          CASE WHEN Max([Maximum Wind]) < 96 THEN 1 ELSE
+              CASE WHEN Max([Maximum Wind]) < 111 THEN 2 ELSE
+                  CASE WHEN Max([Maximum Wind]) < 130 THEN 3 ELSE
+                      CASE WHEN Max([Maximum Wind]) < 157 THEN 4 ELSE 5 END
+                END
+            END
+        END
+    END category
+FROM atlantic
+GROUP BY Name, YEAR(Date)
+ORDER BY category DESC, year, Name ASC</code></pre>
+            </section>
+        </section>
+        <section>
+            <h1>Questions?</h1>
+        </section>
+    </div>
+</div>
+
+<script src="../../lib/js/head.min.js"></script>
+<script src="../../js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                    hljs.initHighlightingOnLoad();
+                }
+            }
+        ]
+    });
+</script>
+</body>
+</html>
