@@ -128,7 +128,7 @@ ON A.name = B.name</code></pre>
         <section id="left-join">
             <section>
                 <h1>Left Join</h1>
-                <p>Used to get the results only in the left table</p>
+                <p>Used to get the results in the left table</p>
                 <img src="img/slide_07.png">
             </section>
             <section>
@@ -155,11 +155,48 @@ ON A.name = B.name</code></pre>
                 <pre class="sql"><code>SELECT * FROM table_a A
 LEFT OUTER JOIN table_b B
 ON A.name = B.name
-WHERE table_b B.id IS null</code></pre>
+WHERE B.id IS null</code></pre>
             </section>
             <section>
                 <h1>Filtered Left Join</h1>
                 <img src="img/slide_10.png">
+            </section>
+        </section>
+        <section id="right-join">
+            <section>
+                <h1>Right Join</h1>
+                <p>Used to get the results in the right table</p>
+                <img src="img/slide_13.png">
+            </section>
+            <section>
+                <h1>Right join</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM table_a A
+RighT OUTER JOIN table_b B
+ON A.name = B.name</code></pre>
+            </section>
+            <section>
+                <h1>RIght Join</h1>
+                <img src="img/slide_14.png">
+            </section>
+        </section>
+        <section id="filtered-right-join">
+            <section>
+                <h1>Filtered Right Join</h1>
+                <p>Used to get the results only in right table</p>
+                <img src="img/slide_15.png">
+            </section>
+            <section>
+                <h1>Filtered Right join</h1>
+                <h2>Example</h2>
+                <pre class="sql"><code>SELECT * FROM table_a A
+RIGHT OUTER JOIN table_b B
+ON A.name = B.name
+WHERE A.id IS null</code></pre>
+            </section>
+            <section>
+                <h1>Filtered Right Join</h1>
+                <img src="img/slide_16.png">
             </section>
         </section>
         <section id="filtered-full-outer-join">
@@ -174,8 +211,8 @@ WHERE table_b B.id IS null</code></pre>
                 <pre class="sql"><code>SELECT * FROM table_a A
 FULL OUTER JOIN table_b B
 ON A.name = B.name
-WHERE table_a A.id IS null
-OR table_b B.id IS null</code></pre>
+WHERE A.id IS null
+OR B.id IS null</code></pre>
             </section>
             <section>
                 <h1>Filtered Outer Join</h1>
@@ -196,7 +233,7 @@ CROSS JOIN table_b B</code></pre>
             </section>
             <section>
                 <h1>Cross Join</h1>
-                <img src="img/slide_13.png">
+                <img src="img/slide_17.png">
             </section>
         </section>
         <section>
