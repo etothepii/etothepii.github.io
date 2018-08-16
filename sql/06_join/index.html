@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>CTO Lecture Series - SQL 101 - 5 Joining Data</title>
+    <title>CTO Lecture Series - SQL 101 - 6 Joining Data</title>
 
     <link rel="stylesheet" href="../../css/reveal.css">
     <link rel="stylesheet" href="../../css/theme/teal.css">
@@ -35,39 +35,41 @@
             <section>
                 <h1>Recap</h1>
                 <ul>
-                    <li class="fragment">Last time we learned how to group by.</li>
-                    <li class="fragment">We learned how to use Min and Max.</li>
-                    <li class="fragment">We learned how to Count, Sum and Avg.</li>
-                    <li class="fragment">We learned how to filter on these requirements with Having.</li>
+                    <li class="fragment">Last time we learned how to a bunch of small things.</li>
+                    <li class="fragment">We learned how to order results.</li>
+                    <li class="fragment">We learned how to stick results together vertically.</li>
+                    <li class="fragment">We learned how to do use case statements.</li>
                 </ul>
             </section>
             <section>
-                <h1>Min and Max</h1>
-                <pre class="sql"><code>SELECT MIN(Latitude) min_latitude
-    , MIN(Longitude) min_longitude
-    , MAX(Latitude) max_latitude
-    , MAX(Longitude) max_longitude
-FROM pacific
-WHERE [Maximum Wind] > 100
-</code></pre>
-            </section>
-            <section>
-                <h1>Count, Sum and Avg</h1>
-                <pre class="sql"><code>SELECT Year(Date)
-    , Name
-    , Count(*) count
-    , Sum([Maximum Wind]) sum
-    , Avg([Maximum Wind]) avg
+                <h1>Order by</h1>
+                <pre class="sql"><code>SELECT Name
+    , Year(Date) year
+    , CASE WHEN Max([Maximum Wind]) > 110 THEN 'Major' ELSE 'Not Major' END major
 FROM atlantic
 GROUP BY Name, Year(Date)
-</code></pre>
+ORDER BY year DESC, major, name ASC</code></pre>
             </section>
             <section>
-                <h1>Having</h1>
-                <pre class="sql"><code>SELECT Year(Date), Name
-FROM pacific
-GROUP BY Year(Date), Name
-HAVING Max([Maximum Wind]) > 140
+                <h1>Union</h1>
+                <pre class="sql"><code>SELECT Year(Date) year FROM atlantic
+GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150
+UNION
+SELECT Year(Date) year FROM pacific
+GROUP BY Year(Date) HAVING Max([Maximum Wind]) > 150</code></pre>
+            </section>
+            <section>
+                <h1>Case</h1>
+                <pre class="sql"><code>SELECT Year(Date) year, Name,
+CASE
+    WHEN MIN([Minimum Pressure]) < 950 THEN
+      'Low'
+    ELSE
+      'Normal'
+    END pressure
+FROM atlantic
+GROUP BY YEAR(Date), Name
+ORDER BY year DESC
 </code></pre>
             </section>
         </section>
@@ -77,15 +79,13 @@ HAVING Max([Maximum Wind]) > 140
             </section>
             <section data-background="img/slide_01.png"></section>
         </section>
-        <section id="distinct">
+        <section id="join">
             <section>
-                <h1>Distinct</h1>
-                <p>Used to get all the distinct entries in a database</p>
+                <h1>Joins</h1>
+                <p>Used to join tables horizontally.</p>
             </section>
-            <section>
-                <h1>Distinct</h1>
-                <h2>Example</h2>
-                <pre class="sql"><code>SELECT DISTINCT Status FROM pacific</code></pre>
+            <section data-background="img/slide_02.png">
+                <h1>Sample Data</h1>
             </section>
         </section>
         <section id="order-by">
@@ -270,7 +270,7 @@ FROM atlantic A</code></pre>
     , CASE WHEN Max([Maximum Wind]) > 110 THEN 'Major' ELSE 'Not Major' END major
 FROM atlantic
 GROUP BY Name, Year(Date)
-ORDER BY year DESC, major, name ASCc</code></pre>
+ORDER BY year DESC, major, name ASC</code></pre>
             </section>
         </section>
         <section>

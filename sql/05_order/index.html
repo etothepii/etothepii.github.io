@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>CTO Lecture Series - SQL 101 - 5 Joining Data</title>
+    <title>CTO Lecture Series - SQL 101 - 5 Everything Else</title>
 
     <link rel="stylesheet" href="../../css/reveal.css">
     <link rel="stylesheet" href="../../css/theme/teal.css">
@@ -270,7 +270,7 @@ FROM atlantic A</code></pre>
     , CASE WHEN Max([Maximum Wind]) > 110 THEN 'Major' ELSE 'Not Major' END major
 FROM atlantic
 GROUP BY Name, Year(Date)
-ORDER BY year DESC, major, name ASCc</code></pre>
+ORDER BY year DESC, major, name ASC</code></pre>
             </section>
         </section>
         <section>
